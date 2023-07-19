@@ -1,0 +1,151 @@
+/* CSS Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: white;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+table {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+tr {
+  padding: 0;
+  margin: 0;
+}
+td {
+  padding: 0;
+  margin: 0;
+}
+
+/* GENERAL SIDEBAR */
+
+#sidebar {
+  width: 200px;
+  height: 100vh;
+  color: #fff;
+}
+
+.sidebar-item {
+  width: 100%;
+  color: rgb(70, 70, 70);
+}
+
+.sidebar-title {
+  border-bottom: rgb(218, 218, 218) solid 1px;
+  color: black;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 15px;
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.sidebar-layout-header {
+  font-size: large;
+  font-weight: 600;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  cursor: default;
+}
+
+.sidebar-widget-text {
+  letter-spacing: 0.2px;
+}
+
+/* SIDEBAR WIDGETS */
+
+.sidebar-widget {
+  background-color: #fff;
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.sidebar-widget:hover {
+  background-color: rgb(246, 253, 247);
+  color: rgb(58, 160, 213);
+  cursor: pointer;
+}
+
+.sidebar-widget.active {
+  background-color: rgb(235, 242, 245) !important;
+  color: rgb(85, 168, 69) !important;
+}
+
+.sidebar-widget.default {
+  display: flex !important;
+  padding-left: 15px !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+.sidebar-widget.header {
+  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.sidebar-widget.section {
+  padding-left: 25px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: none;
+}
+.sidebar-widget.content {
+  padding-left: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: none;
+}
+
+/* SIDEBAR SPACER */
+
+.sidebar-spacer {
+  border-bottom: rgb(218, 218, 218) solid 1px;
+  padding-top: 5px;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+/* WIDGET ARROW */
+
+.arrow {
+  border: solid rgb(215, 217, 218);
+  border-width: 0 1px 1px 0;
+  display: inline-block;
+  padding: 2.8px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+}
+.sidebar-widget:hover > span > .arrow {
+  border: solid rgb(58, 160, 213);
+  border-width: 0 1px 1px 0;
+  cursor: pointer;
+}
+.arrow.active {
+  transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+}
+
+/* WIDGET FLEX BOX */
+
+.flex-container {
+  display: flex;
+}
+.flex-item {
+  flex: 1;
+  padding: 10px;
+}
+.item-1 {
+  padding: 0;
+  margin: 0;
+  flex-basis: 85%;
+}
+.item-2 {
+  padding: 0;
+  margin: 0;
+  flex-basis: 15%;
+}
