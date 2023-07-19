@@ -96,6 +96,9 @@ li {
   vertical-align: top;
   text-align: center;
 }
+.column.three {
+  width: calc(30% - 20px);
+}
 .column.nested {
   width: calc(80% - 20px);
   padding-bottom: 0px;
