@@ -1,0 +1,1 @@
+This file is used to represent the index.html file while the default content is being made. Until then, the index.html file is in the root.
