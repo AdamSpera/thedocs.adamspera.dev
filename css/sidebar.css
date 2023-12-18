@@ -149,3 +149,16 @@ td {
   margin: 0;
   flex-basis: 15%;
 }
+
+/* SIDEBAR SIDE BORDER */
+
+#content {
+  flex: 1;
+  padding-left: 30px;
+  padding-bottom: 25px;
+  background-color: #fff;
+}
+
+#content-border {
+  border-left: 1px solid rgb(218, 218, 218);
+}
