@@ -1,37 +1,24 @@
 /* CSS Styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+
+* {
+  font-family: 'Manrope', sans-serif !important;
+}
+
 body {
-  font-family: Arial, sans-serif;
   background-color: white;
   margin: 0;
   padding: 0;
   display: flex;
 }
 
-table {
-  width: 100%;
-  padding: 0;
-  margin: 0;
-}
-tr {
-  padding: 0;
-  margin: 0;
-}
-td {
-  padding: 0;
-  margin: 0;
-}
-
 /* GENERAL SIDEBAR */
 
 #sidebar {
-  width: 200px;
+  width: 225px;
   height: 100vh;
-  color: #fff;
-}
-
-.sidebar-item {
-  width: 100%;
-  color: rgb(70, 70, 70);
+  letter-spacing: 0.2px;
 }
 
 .sidebar-title {
@@ -42,6 +29,15 @@ td {
   padding-left: 15px;
   font-size: 1.5em;
   margin: 0;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.sidebar-title>span {
+  font-weight: 700;
+  font-size: 26px;
+  padding-bottom: 1px;
 }
 
 .sidebar-layout-header {
@@ -51,10 +47,6 @@ td {
   padding-top: 10px;
   padding-bottom: 10px;
   cursor: default;
-}
-
-.sidebar-widget-text {
-  letter-spacing: 0.2px;
 }
 
 /* SIDEBAR WIDGETS */
@@ -77,28 +69,27 @@ td {
   color: rgb(85, 168, 69) !important;
 }
 
-.sidebar-widget.default {
-  display: flex !important;
-  padding-left: 15px !important;
-  padding-top: 10px !important;
-  padding-bottom: 10px !important;
+/* SIDEBAR DYNAMIC WIDGETS */
+
+.tree {
+  margin-top: 10px;
+  padding: 0px;
 }
-.sidebar-widget.header {
+
+.tree ul {
+  margin: 0px;
+  padding: 0px;
+}
+
+.tree li {
+  list-style-type: none;
   padding-left: 15px;
   padding-top: 10px;
-  padding-bottom: 10px;
+  margin-bottom: 8px;
 }
-.sidebar-widget.section {
-  padding-left: 25px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  display: none;
-}
-.sidebar-widget.content {
-  padding-left: 40px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  display: none;
+
+.tree .active {
+  color: rgb(85, 168, 69) !important;
 }
 
 /* SIDEBAR SPACER */
@@ -110,40 +101,23 @@ td {
   margin-bottom: 15px;
 }
 
-/* WIDGET ARROW */
-
-.arrow {
-  border: solid rgb(215, 217, 218);
-  border-width: 0 1px 1px 0;
-  display: inline-block;
-  padding: 2.8px;
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-}
-.sidebar-widget:hover > span > .arrow {
-  border: solid rgb(58, 160, 213);
-  border-width: 0 1px 1px 0;
-  cursor: pointer;
-}
-.arrow.active {
-  transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-}
-
 /* WIDGET FLEX BOX */
 
 .flex-container {
   display: flex;
 }
+
 .flex-item {
   flex: 1;
   padding: 10px;
 }
+
 .item-1 {
   padding: 0;
   margin: 0;
   flex-basis: 85%;
 }
+
 .item-2 {
   padding: 0;
   margin: 0;
