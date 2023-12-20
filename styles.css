@@ -16,7 +16,7 @@ body {
 /* GENERAL SIDEBAR */
 
 #sidebar {
-  width: 225px;
+  width: auto;
   height: 100vh;
   letter-spacing: 0.2px;
 }
@@ -38,6 +38,7 @@ body {
   font-weight: 700;
   font-size: 26px;
   padding-bottom: 1px;
+  margin-right: 11px;
 }
 
 .sidebar-layout-header {
@@ -72,7 +73,7 @@ body {
 /* SIDEBAR DYNAMIC WIDGETS */
 
 .tree {
-  margin-top: 10px;
+  margin-top: 6px;
   padding: 0px;
 }
 
@@ -84,8 +85,11 @@ body {
 .tree li {
   list-style-type: none;
   padding-left: 15px;
-  padding-top: 10px;
-  margin-bottom: 8px;
+  line-height: 38px;
+
+  border: 1.5px solid grey;
+  border-radius: 8px;
+  margin: 10px;
 }
 
 .tree .active {
