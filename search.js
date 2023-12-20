@@ -11,49 +11,87 @@ $(document).ready(function () {
     $("#searchResults").empty();
   });
 
-  $("#searchInput").on('input', function () {
+  $("#searchInput").on('input', async function () {
 
     var query = $(this).val();
     if (query === '') {
       $("#searchResults").empty();
       return;
     }
-    // Clear the previous search results
     $("#searchResults").empty();
 
-    // Search the directory structure for files that contain the query
-    var searchResults = searchFiles(directoryStructure, query);
-
-    // Display the search results
-    for (let i = 0; i < searchResults.length; i++) {
-      var filePath = searchResults[i].substring(1);
-
-      // Split the file path into the directory and the file name
-      var lastSlashIndex = filePath.lastIndexOf('/');
-      var directory = filePath.substring(0, lastSlashIndex);
-      var fileName = filePath.substring(lastSlashIndex + 1);
-
-      // Add spaces around the slashes in the directory
-      var formattedDirectory = directory.replace(/\//g, ' / ');
-
-      // Make the query bold in the file name
-      var boldedFileName = fileName.replace(new RegExp(query, 'gi'), '<strong>$&</strong>');
-
-      // Combine the directory and the bolded file name
-      var formattedFilePath = formattedDirectory + ' / ' + boldedFileName.replace('.md', '');
-
-      let result = $('<p class="result-blob"> <img src="icons/file-open.svg" alt="File" class="icon-result">' + formattedFilePath + '</p>');
-      result.click(async function () {
-        console.log(filePath);
-        await fetchAndDisplayMarkdown(filePath);
-        $('#searchModal').modal('hide');
-      });
-      $("#searchResults").append(result);
-    }
-
+    fileNameSearch(query);
+    await fileKeySearch(query);
   });
 
 });
+
+function fileNameSearch(query) {
+
+  // Search the directory structure for files that contain the query
+  var searchResults = searchFiles(directoryStructure, query);
+
+  // Display the search results
+  for (let i = 0; i < searchResults.length; i++) {
+    var filePath = searchResults[i].substring(1);
+
+    // Split the file path into the directory and the file name
+    var lastSlashIndex = filePath.lastIndexOf('/');
+    var directory = filePath.substring(0, lastSlashIndex);
+    var fileName = filePath.substring(lastSlashIndex + 1);
+
+    // Add spaces around the slashes in the directory
+    var formattedDirectory = directory.replace(/\//g, ' / ');
+
+    // Make the query bold in the file name
+    var boldedFileName = fileName.replace(new RegExp(query, 'gi'), '<strong>$&</strong>');
+
+    // Combine the directory and the bolded file name
+    var formattedFilePath = formattedDirectory + ' / ' + boldedFileName.replace('.md', '');
+
+    let result = $('<p class="result-blob"> <img src="icons/file-solid.svg" alt="File" class="icon-result">' + formattedFilePath + '</p>');
+    result.click(async function () {
+      console.log(filePath);
+      await fetchAndDisplayMarkdown(filePath);
+      $('#searchModal').modal('hide');
+    });
+    $("#searchResults").append(result);
+  }
+
+}
+
+async function fileKeySearch(input) {
+  let mdFiles = searchFiles(directoryStructure, '.md');
+  let matchingFiles = [];
+
+  for (let url of mdFiles) {
+    url = url.replace('/', ''); // Remove the first '/'
+    let data = await $.get(`content/${url}`);
+    const converter = new showdown.Converter();
+    const html = converter.makeHtml(data);
+
+    $(html).find('img').each(function () {
+      let src = $(this).attr('src');
+      input = input.toLowerCase();
+      if (src.includes("https://img.shields.io/badge/") && src.includes("-darkgreen")) {
+        var badgeText = src.split("https://img.shields.io/badge/")[1].split("-darkgreen")[0];
+        var lowerBadgeText = badgeText.toLowerCase();
+        if (lowerBadgeText.includes(input) && !matchingFiles.includes(url)) {
+          matchingFiles.push(url);
+
+          let formattedFilePath = url.replace(/_/g, ' ').replace('.md', '');
+          let result = $('<p class="result-blob"> <img src="https://img.shields.io/badge/' + badgeText + '-darkgreen" alt="Badge" class="icon-result">' + formattedFilePath + '</p>');
+          result.click(async function () {
+            console.log(url);
+            await fetchAndDisplayMarkdown(url);
+            $('#searchModal').modal('hide');
+          });
+          $("#searchResults").append(result);
+        }
+      }
+    });
+  }
+}
 
 function searchFiles(directory, query, path = '') {
   let results = [];
