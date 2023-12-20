@@ -43,7 +43,7 @@ async function fetchDirectoryContents(url) {
 
 async function getCachedResponse(cache, url) {
     const lastFetch = await cache.match(url + '-time');
-    if (lastFetch && Date.now() - lastFetch > 7 * 24 * 60 * 60 * 1000) {
+    if (lastFetch && Date.now() - lastFetch > 60 * 60 * 1000) {
         await cache.delete(url);
         await cache.delete(url + '-time');
     }
@@ -85,7 +85,7 @@ function createTree(structure, parentElement, parentPath = '') {
 }
 
 function createListItem(key, value, currentPath) {
-    const li = $('<li></li>').text(key);
+    const li = $('<li></li>').text(key.replace('.md', ''));
     if ($.isPlainObject(value)) {
         handleDirectory(li, value, currentPath);
     } else {
