@@ -7,7 +7,7 @@ $(document).ready(function () {
     });
 
     const user = "adamspera"
-    const repo = "the-docs"
+    const repo = "docs.adamspera.dev"
     const start_folder = "content"
     const base_url = `https://api.github.com/repos/${user}/${repo}/contents/${start_folder}`;
 
