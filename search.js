@@ -80,6 +80,7 @@ async function fileKeySearch(input) {
           matchingFiles.push(url);
 
           let formattedFilePath = url.replace(/_/g, ' ').replace('.md', '');
+          formattedFilePath = formattedFilePath.replace(/\//g, ' / '); // Add spaces around '/'
           let result = $('<p class="result-blob"> <img src="https://img.shields.io/badge/' + badgeText + '-darkgreen" alt="Badge" class="icon-result">' + formattedFilePath + '</p>');
           result.click(async function () {
             console.log(url);
