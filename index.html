@@ -15,6 +15,9 @@
     content="Adam Spera, The Docs, Exam, Certification, Learning Resources, Cisco, DCCOR, DCAUTO, CCNP, CCNP Data Center">
   <meta name="author" content="Adam Spera">
 
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
   <!-- Primary CSS -->
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -45,9 +48,9 @@
       <div class="sidebar-spacer"></div>
 
       <div class="sidebar-layout-header">
-        <div class="flex-item item-1">Certifications</div>
+        <div class="flex-item item-1">Documentation</div>
+        <a href="#" class="icon search" id="search" data-bs-toggle="modal" data-bs-target="#searchModal">Search</a>
       </div>
-
 
     </section>
 
@@ -57,9 +60,27 @@
 
     </section>
 
-  </div>
+    <section id="popup-model">
 
+      <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <input type="text" class="form-control form-control-lg" id="searchInput" placeholder="Search...">
+            </div>
+            <div class="modal-body">
+              <!-- Modal content goes here -->
+              <div id="searchResults"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
   <div id="content-border"></div>
+
   <div id="content"></div>
 
   <!-- Include jQuery -->
@@ -68,6 +89,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
   <!-- Include Primary JS -->
   <script src="script.js"></script>
+  <script src="search.js"></script>
+  <!-- Include Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 
 </html>
