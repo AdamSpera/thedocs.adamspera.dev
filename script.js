@@ -45,8 +45,8 @@ async function getCachedResponse(cache, url) {
     const lastFetchResponse = await cache.match(url + '-time');
     if (lastFetchResponse) {
         const lastFetch = await lastFetchResponse.text();
-        if (Date.now() - lastFetch > 1000) {
-            console.log(`Cached response for URL: ${url} is older than 10 minutes. Deleting from cache.`);
+        if (Date.now() - lastFetch > 1800000) {
+            console.log(`Cached response for URL: ${url} is older than 30 minutes. Deleting from cache.`);
             await cache.delete(url);
             await cache.delete(url + '-time');
         }
