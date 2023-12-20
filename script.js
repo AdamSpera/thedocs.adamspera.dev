@@ -9,7 +9,7 @@ $(document).ready(function () {
     const user = "adamspera"
     const repo = "docs.adamspera.dev"
     const start_folder = "content"
-    const base_url = `https://api.github.com/repos/${user}/${repo}/contents/${start_folder}`;
+    const base_url = `https://api.github.com/repos/${user}/${repo}/${start_folder}`;
 
     fetchDirectoryContents(base_url).then(structure => {
         displayTree(structure, $('#tree'));
