@@ -42,18 +42,24 @@ async function fetchDirectoryContents(url) {
 }
 
 async function getCachedResponse(cache, url) {
-    const lastFetch = await cache.match(url + '-time');
-    if (lastFetch && Date.now() - lastFetch > 60 * 60 * 1000) {
-        await cache.delete(url);
-        await cache.delete(url + '-time');
+    const lastFetchResponse = await cache.match(url + '-time');
+    if (lastFetchResponse) {
+        const lastFetch = await lastFetchResponse.text();
+        if (Date.now() - lastFetch > 10 * 60 * 1000) {
+            console.log(`Cached response for URL: ${url} is older than 10 minutes. Deleting from cache.`);
+            await cache.delete(url);
+            await cache.delete(url + '-time');
+        }
     }
     return await cache.match(url);
 }
 
 async function fetchAndCacheResponse(cache, url) {
+    const start = Date.now();
     const response = await $.ajax({ url: url, method: 'GET' });
     await cache.put(url, new Response(JSON.stringify(response)));
     await cache.put(url + '-time', new Response(Date.now().toString()));
+    const end = Date.now();
     return response;
 }
 

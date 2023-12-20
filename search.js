@@ -50,10 +50,11 @@ $(document).ready(function () {
 function searchFiles(directory, query, path = '') {
   let results = [];
   for (let [name, type] of Object.entries(directory)) {
-    if (type === 'file' && name.toLocaleLowerCase().includes(query.toLocaleLowerCase())) {
-      results.push(path + '/' + name);
+    let fullPath = path + '/' + name;
+    if (type === 'file' && fullPath.toLocaleLowerCase().includes(query.toLocaleLowerCase())) {
+      results.push(fullPath);
     } else if (type !== 'file') {
-      results = results.concat(searchFiles(type, query, path + '/' + name));
+      results = results.concat(searchFiles(type, query, fullPath));
     }
   }
   return results;
