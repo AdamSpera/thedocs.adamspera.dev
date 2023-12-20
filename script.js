@@ -120,7 +120,6 @@ function handleFile(li, currentPath, key) {
     li.click((event) => {
         event.stopPropagation();
 
-        // Change the source of all images with a source of 'icons/file-solid.svg' to 'icons/file-regular.svg'
         $('img[src="icons/file-open.svg"]').each(function () {
             $(this).attr('src', 'icons/file-solid.svg');
         });

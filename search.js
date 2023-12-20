@@ -34,7 +34,7 @@ $(document).ready(function () {
       // Make the query bold
       var boldedFilePath = formattedFilePath.replace(new RegExp(query, 'gi'), '<strong>$&</strong>');
 
-      let result = $('<p>' + boldedFilePath + '</p>');
+      let result = $('<p class="result-blob"> <img src="icons/file-open.svg" alt="File" class="icon-result">' + boldedFilePath + '</p>');
       result.click(async function () {
         console.log(filePath);
         await fetchAndDisplayMarkdown(filePath);

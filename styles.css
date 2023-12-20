@@ -107,10 +107,17 @@ body {
 .icon {
   margin-right: 10px;
 }
+
 .icon-search {
   font-size: 13px;
   text-decoration: none;
   color: rgb(58, 160, 213);
+}
+
+.icon-result {
+  margin-left: 8px;
+  margin-right: 15px;
+  padding-bottom: 4px;
 }
 
 /* SIDEBAR SPACER */
@@ -150,7 +157,9 @@ body {
 #content {
   flex: 1;
   padding-left: 30px;
-  padding-bottom: 25px;
+  padding-right: 30px;
+  padding-top: 25px;
+  margin-bottom: 20px;
   background-color: #fff;
 }
 
@@ -174,5 +183,17 @@ body {
 }
 
 #searchResults {
-  padding-left: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.result-blob {
+  padding: 10px;
+  border: 1px solid rgb(218, 218, 218);
+  border-radius: 10px;
+}
+
+.result-blob:hover {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
