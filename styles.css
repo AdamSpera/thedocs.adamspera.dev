@@ -21,6 +21,7 @@ body {
   height: 100vh;
   letter-spacing: 0.2px;
   flex-shrink: 0;
+  user-select: none;
 }
 
 .sidebar-title {
