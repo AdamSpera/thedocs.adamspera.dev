@@ -87,9 +87,10 @@ body {
   padding-left: 15px;
   line-height: 38px;
 
-  border: 1.5px solid grey;
-  border-radius: 8px;
-  margin: 10px;
+  /* border: 1.5px solid grey; */
+  /* border-radius: 8px; */
+  /* margin: 10px; */
+  margin-left: 5px;
 }
 
 .tree .active {
