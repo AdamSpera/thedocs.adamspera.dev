@@ -19,7 +19,8 @@ async function displayExplorePage() {
 
   // Create a div with a class of explore-page
   const explorePage = $('<div></div>').addClass('explore-page');
-  explorePage.append('<h1>Explore</h1>');
+  explorePage.append('<h1>Explore Topics</h1>');
+  explorePage.append('<p>Click on a topic to search for associated content.</p>');
   explorePage.append('<hr>');
   explorePage.append('<input type="text" class="form-control form-control-lg" id="searchTopicsInput" placeholder="Search topics..."></input>');
   explorePage.append('<br>');

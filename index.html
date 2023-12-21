@@ -31,24 +31,26 @@
         <img src="thedocslogo.png" width="55" height="55">
         <span>The Docs</span>
       </div>
-      <br>
 
-      <div class="sidebar-layout-header">
-        <div class="flex-item item-1" style="font-size: 19px; font-weight: 600;">Welcome</div>
-      </div>
+      <div class="sidebar-spacer"></div>
 
-      <div id="explore" class="sidebar-widget active">
-        <div class="flex-item item-1">Explore Topics</div>
-      </div>
-
-      <div id="search" class="sidebar-widget">
-        <div class="flex-item item-1">Search Docs</div>
-      </div>
+      <div id="search" class="btn btn-primary sidebar-button">Search Docs</div>
 
       <div class="sidebar-spacer"></div>
 
       <div class="sidebar-layout-header">
-        <div class="flex-item item-1">Documentation</div>
+        <div style="font-size: 19px; font-weight: 600;">Welcome</div>
+      </div>
+
+      <div id="explore" class="sidebar-widget active">
+        <div>Explore Topics</div>
+      </div>
+      <br>
+
+      <div class="sidebar-spacer"></div>
+
+      <div class="sidebar-layout-header">
+        <div>Documentation</div>
       </div>
 
     </section>
@@ -65,7 +67,24 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <input type="text" class="form-control form-control-lg" id="searchInput" placeholder="Search...">
+              <table>
+                <tr>
+                  <td>
+                    <h3>Search Docs</h3>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>Query all document names and associated topic tags.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="text" class="form-control form-control-lg" id="searchInput"
+                      placeholder="Search...">
+                  </td>
+                </tr>
+              </table>
             </div>
             <div class="modal-body">
               <!-- Modal content goes here -->
