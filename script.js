@@ -6,11 +6,11 @@ const base_url = `https://api.github.com/repos/${user}/${repo}/contents/${start_
 $(document).ready(initializeApp);
 
 function initializeApp() {
-    setupSidebarClickEvent();
+    setupSidebarWidgetClickEvent();
     fetchAndDisplayDirectoryContents();
 }
 
-function setupSidebarClickEvent() {
+function setupSidebarWidgetClickEvent() {
     $('.sidebar-widget').on('click', function () {
         $('.sidebar-widget').removeClass('active');
         $(this).addClass('active');
