@@ -116,8 +116,13 @@ body {
 }
 
 .icon-result {
-  margin-left: 6px;
-  margin-right: 14px;
+  margin-left: 3px;
+  margin-right: 9px;
+  padding-bottom: 2.6px;
+}
+
+.icon-tag {
+  margin-right: 8px;
   padding-bottom: 2.5px;
 }
 

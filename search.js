@@ -63,7 +63,7 @@ function fileNameSearch(query) {
 
 async function fileKeySearch(input) {
   let mdFiles = searchFiles(directoryStructure, '.md');
-  let matchingFiles = [];
+  let matchingFiles = new Map();
 
   for (let url of mdFiles) {
     url = url.replace('/', ''); // Remove the first '/'
@@ -77,22 +77,32 @@ async function fileKeySearch(input) {
       if (src.includes("https://img.shields.io/badge/") && src.includes("-darkgreen")) {
         var badgeText = src.split("https://img.shields.io/badge/")[1].split("-darkgreen")[0];
         var lowerBadgeText = badgeText.toLowerCase();
-        if (lowerBadgeText.includes(input) && !matchingFiles.includes(url)) {
-          matchingFiles.push(url);
-
-          let formattedFilePath = url.replace(/_/g, ' ').replace('.md', '');
-          formattedFilePath = formattedFilePath.replace(/\//g, ' / '); // Add spaces around '/'
-          let result = $('<p class="result-blob"> <img src="https://img.shields.io/badge/' + badgeText + '-darkgreen" alt="Badge" class="icon-result">' + formattedFilePath + '</p>');
-          result.click(async function () {
-            console.log(url);
-            await fetchAndDisplayMarkdown(url);
-            $('.sidebar-widget, .tree li').removeClass('active');
-            $('#searchModal').modal('hide');
-          });
-          $("#searchResults").append(result);
+        if (lowerBadgeText.includes(input)) {
+          if (!matchingFiles.has(url)) {
+            matchingFiles.set(url, []);
+          }
+          matchingFiles.get(url).push(badgeText);
         }
       }
     });
+  }
+  for (let [url, badges] of matchingFiles.entries()) {
+    let formattedFilePath = url.replace(/_/g, ' ').replace('.md', '');
+    formattedFilePath = formattedFilePath.replace(/\//g, ' / '); // Add spaces around '/'
+    let result = $('<p class="result-blob" style="display: flex; flex-wrap: wrap;"></p>');
+    let textElement = $('<span style="padding-right: 11px">' + formattedFilePath + '</span>');
+    result.append(textElement);
+    let badgesElement = $('<span></span>');
+    for (let badgeText of badges) {
+      badgesElement.append('<img src="https://img.shields.io/badge/' + badgeText + '-darkgreen" alt="Badge" class="icon-tag">');
+    }
+    result.append(badgesElement);
+    result.click(async function () {
+      await fetchAndDisplayMarkdown(url);
+      $('.sidebar-widget, .tree li').removeClass('active');
+      $('#searchModal').modal('hide');
+    });
+    $("#searchResults").append(result);
   }
 }
 
