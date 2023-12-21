@@ -62,6 +62,7 @@ function fileNameSearch(query) {
 }
 
 async function fileKeySearch(input) {
+  input = input.replace(' ', '%20');
   let mdFiles = searchFiles(directoryStructure, '.md');
   let matchingFiles = new Map();
 
