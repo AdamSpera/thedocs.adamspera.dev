@@ -24,6 +24,10 @@ $(document).ready(function () {
     await fileKeySearch(query);
   });
 
+  $('#search-button').click(function() {
+    $('#searchModal').modal('show');
+  });
+
 });
 
 function fileNameSearch(query) {
@@ -52,6 +56,7 @@ function fileNameSearch(query) {
     let result = $('<p class="result-blob"> <img src="icons/file-solid.svg" alt="File" class="icon-result">' + formattedFilePath + '</p>');
     result.click(async function () {
       console.log(filePath);
+      $("img[src='icons/file-open.svg']").attr("src", "icons/file-solid.svg");
       await fetchAndDisplayMarkdown(filePath);
       $('.sidebar-widget, .tree li').removeClass('active');
       $('#searchModal').modal('hide');
