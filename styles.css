@@ -79,6 +79,10 @@ body {
   margin-bottom: 18px;
 }
 
+.sidebar-button:hover {
+  cursor: pointer;
+}
+
 .sidebar-spacer {
   border-bottom: rgb(218, 218, 218) solid 1px;
 }
