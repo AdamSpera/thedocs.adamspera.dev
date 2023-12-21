@@ -5,7 +5,8 @@ $(document).ready(function () {
 
 function setupSidebarExploreClickEvent() {
   $('#explore').on('click', function () {
-    $('.sidebar-widget').removeClass('active');
+    $('.sidebar-widget, li').removeClass('active');
+    $("img[src='icons/file-open.svg']").attr("src", "icons/file-solid.svg");
     $(this).addClass('active');
     displayExplorePage();
   });
