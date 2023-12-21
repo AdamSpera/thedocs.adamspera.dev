@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>The Docs - AdamSpera</title>
+
+  <!-- Shortcut Icon -->
+  <link rel="shortcut icon" href="thedocslogo_min.png" type="image/x-icon">
+
+  <!-- SEO Meta Tags -->
+  <meta name="description"
+    content="The Docs is a collection of notes and documentation for various certifications and exams.">
+  <meta name="keywords"
+    content="Adam Spera, The Docs, Exam, Certification, Learning Resources, Cisco, DCCOR, DCAUTO, CCNP, CCNP Data Center">
+  <meta name="author" content="Adam Spera">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Primary CSS -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div id="sidebar">
+
+    <section id="static-content">
+
+      <div class="sidebar-title">
+        <img src="thedocslogo.png" width="55" height="55">
+        <span>The Docs</span>
+      </div>
+      <br>
+
+      <div class="sidebar-layout-header">
+        <div class="flex-item item-1" style="font-size: 19px; font-weight: 600;">Welcome</div>
+      </div>
+
+      <div id="default_about" class="sidebar-widget active">
+        <div class="flex-item item-1">About</div>
+      </div>
+
+      <div id="default_resources" class="sidebar-widget ">
+        <div class="flex-item item-1">Resources</div>
+      </div>
+
+      <div class="sidebar-spacer"></div>
+
+      <div class="sidebar-layout-header">
+        <div class="flex-item item-1">Documentation</div>
+        <a href="#" class="icon-search" id="search" data-bs-toggle="modal" data-bs-target="#searchModal">Search</a>
+      </div>
+
+    </section>
+
+    <section id="sidebar-dynamic">
+
+      <ul id="tree" class="tree"></ul>
+
+    </section>
+
+    <section id="popup-model">
+
+      <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <input type="text" class="form-control form-control-lg" id="searchInput" placeholder="Search...">
+            </div>
+            <div class="modal-body">
+              <!-- Modal content goes here -->
+              <div id="searchResults"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  <div id="content-border"></div>
+
+  <div id="content"></div>
+
+  <!-- Include jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Include Shutdown -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
+  <!-- Include Primary JS -->
+  <script src="script.js"></script>
+  <script src="search.js"></script>
+  <!-- Include Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <script>
+    const url = "DCCOR/Network/Switching Protocols.md";
+    $.get(`content/${url}`, (data) => {
+        const converter = new showdown.Converter();
+        const html = converter.makeHtml(data);
+        $('#content').html(html);
+    });
+  </script>
+</body>
+
+</html>

@@ -1,6 +1,7 @@
 /* CSS Styles */
 
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lunasima:wght@400;700&display=swap');
 
 * {
   font-family: 'Manrope', sans-serif !important;
@@ -164,15 +165,6 @@ body {
   border-left: 1px solid rgb(218, 218, 218);
 }
 
-#content {
-  flex: 1;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-top: 25px;
-  margin-bottom: 20px;
-  background-color: rgba(240, 240, 240, 0.1);
-}
-
 /* MODEL STYLES */
 
 .modal-content {
@@ -198,4 +190,39 @@ body {
 .result-blob:hover {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
   cursor: pointer;
+}
+
+/* CONTENT PAGE */
+
+#content {
+  font-family: Lunasima, sans-serif !important;
+  letter-spacing: 0.7px;
+  flex: 1;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 25px;
+  margin-bottom: 20px;
+  background-color: rgba(240, 240, 240, 0.1);
+}
+
+#content h1 {
+  font-size: 2.4rem;
+  font-weight: 800;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+#content h2 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+#content h3 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+#content h4 {
+  font-size: 1.4rem;
 }
