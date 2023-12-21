@@ -53,6 +53,7 @@ function fileNameSearch(query) {
     result.click(async function () {
       console.log(filePath);
       await fetchAndDisplayMarkdown(filePath);
+      $('.sidebar-widget, .tree li').removeClass('active');
       $('#searchModal').modal('hide');
     });
     $("#searchResults").append(result);
@@ -85,6 +86,7 @@ async function fileKeySearch(input) {
           result.click(async function () {
             console.log(url);
             await fetchAndDisplayMarkdown(url);
+            $('.sidebar-widget, .tree li').removeClass('active');
             $('#searchModal').modal('hide');
           });
           $("#searchResults").append(result);
