@@ -24,10 +24,6 @@ $(document).ready(function () {
     await fileKeySearch(query);
   });
 
-  $('#search-button').click(function() {
-    $('#searchModal').modal('show');
-  });
-
 });
 
 function fileNameSearch(query) {
