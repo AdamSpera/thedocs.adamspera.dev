@@ -8,18 +8,9 @@
 ![Keyword](https://img.shields.io/badge/Port%20Channel-darkgreen)
 ![Keyword](https://img.shields.io/badge/EtherChannel-darkgreen)
 
-### Table of Contents
+<hr>
 
-- [Link Aggregation Control Protocol (LACP)](#link-aggregation-control-protocol-lacp)
-    - [Table of Contents](#table-of-contents)
-  - [LACP Port Channels](#lacp-port-channels)
-    - [- Benefits](#--benefits)
-    - [- Specifications](#--specifications)
-      - [Channel Modes](#channel-modes)
-      - [Channel Compatibility](#channel-compatibility)
-    - [- Configuration](#--configuration)
-
-## LACP Port Channels
+## Overview
 
 Link Aggregation Control Protocol (LACP) is a protocol that allows multiple physical links to be bundled into one logical link. LACP allows a network device to negotiate an automatic bundling of links by sending LACP packets to the peer (directly connected device that also implements LACP).
 
@@ -29,7 +20,7 @@ Link Aggregation Control Protocol (LACP) is a protocol that allows multiple phys
 
 **NOTE: LACP is defined by the IEEE in the 802.3ad & 802.1AX standards.**
 
-### - Benefits
+## Benefits
 
 Benefits and advantages of Port Channels:
 
@@ -41,7 +32,7 @@ Benefits and advantages of Port Channels:
 
 - Resiliency against physical link failures
 
-### - Specifications
+## Specifications
 
 The maximum number of ports in a channel depends on the exact switch hardware and software combination. For example, on the Cisco Nexus 9000 Series Switches, you can bundle up to 32 active links into a port channel.
 
@@ -51,7 +42,7 @@ On the Cisco Nexus 9000 platform, port channels can be configured on Layer 2 or 
 
 **NOTE: Nexus 9k port channels can be configured on layer 2 and layer 3 interfaces.**
 
-#### Channel Modes
+### Channel Modes
 
 <table>
   <thead>
@@ -76,7 +67,7 @@ On the Cisco Nexus 9000 platform, port channels can be configured on Layer 2 or 
   </tbody>
 </table>
 
-#### Channel Compatibility
+### Channel Compatibility
 
 <table>
   <thead>
@@ -109,7 +100,7 @@ On the Cisco Nexus 9000 platform, port channels can be configured on Layer 2 or 
   </tbody>
 </table>
 
-### - Configuration
+## Configuration
 
 <pre>
 <span>Enable LACP</span>
