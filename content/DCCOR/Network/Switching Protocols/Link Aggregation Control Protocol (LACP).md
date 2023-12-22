@@ -20,6 +20,13 @@ LACP is defined by the IEEE in the **802.3ad & 802.1AX** standards.
 ![Physical vs Physical](../../../../media/lacp_physical_logical.png)
 </main>
 
+### Benefits
+
+- Optimized bandwidth usage
+- Improved network convergence
+- Spanning-tree mitigation
+- Resiliency against physical link failures
+
 ### Load Balancing
 
 LACP load balancing uses a hash that returns a number typically between 0 and 7. **The hash is based on the source and destination MAC address, IP address, and TCP/UDP port numbers**. The hash is then used to determine which link in the bundle the packet will be sent out of.
@@ -28,18 +35,6 @@ Due to the law of averages, it is always advised to use a number of links that i
 
 ![LACP Hash Assignment](../../../../media/lacp_hash_assignment_1.png)
 ![LACP Hash Assignment 2](../../../../media/lacp_hash_assignment_2.png)
-
-## Benefits
-
-Benefits and advantages of Port-Channels:
-
-- Optimized bandwidth usage
-
-- Improved network convergence
-
-- Spanning-tree mitigation
-
-- Resiliency against physical link failures
 
 ## Specifications
 
