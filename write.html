@@ -3,99 +3,14 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>The Docs - AdamSpera</title>
-
-  <!-- Shortcut Icon -->
-  <link rel="shortcut icon" href="thedocslogo_min.png" type="image/x-icon">
-
-  <!-- SEO Meta Tags -->
-  <meta name="description"
-    content="The Docs is a collection of notes and documentation by Adam Spera for various certifications and exams. Including: CCNP Enterprise, CCNP DataCenter, ENCOR, ENAUTO, DCCOR, DCAUTO, and more on the way!">
-  <meta name="keywords"
-    content="Adam Spera, The Docs, Exam, Certification, Learning Resources, Cisco, DCCOR, DCAUTO, CCNP, CCNP Data Center">
-  <meta name="author" content="Adam Spera">
-
+  <title>Writing Preview</title>
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-
   <!-- Primary CSS -->
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <!-- <div id="sidebar">
-
-    <section id="static-content">
-
-      <div class="sidebar-title">
-        <img src="thedocslogo.png" width="55" height="55">
-        <span>The Docs</span>
-      </div>
-
-      <div class="sidebar-spacer"></div>
-
-      <div id="search" class="btn btn-primary sidebar-button">Search Docs</div>
-
-      <div class="sidebar-spacer"></div>
-
-      <div class="sidebar-layout-header">
-        <div style="font-size: 19px; font-weight: 600;">Welcome</div>
-      </div>
-
-      <div id="explore" class="sidebar-widget active">
-        <div>Explore Topics</div>
-      </div>
-      <br>
-
-      <div class="sidebar-spacer"></div>
-
-      <div class="sidebar-layout-header">
-        <div>Documentation</div>
-      </div>
-
-    </section>
-
-    <section id="sidebar-dynamic">
-
-      <ul id="tree" class="tree"></ul>
-
-    </section>
-
-    <section id="popup-model">
-
-      <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <table>
-                <tr>
-                  <td>
-                    <h3>Search Docs</h3>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <p>Query all document names and associated topic tags.</p>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <input type="text" class="form-control form-control-lg" id="searchInput" placeholder="Search...">
-                  </td>
-                </tr>
-              </table>
-            </div>
-            <div class="modal-body">
-              <div id="searchResults"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </section>
-
-  </div> -->
-  <div id="content-border"></div>
 
   <div id="content"></div>
 
@@ -103,10 +18,10 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- Include Shutdown -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
-  <!-- Include Primary JS -->
-  <!-- <script src="script.js"></script>
-  <script src="search.js"></script>
-  <script src="explore.js"></script> -->
+  <!-- Include Bootstrap -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  
+  <!-- Inline Preview JS -->
   <script>
     const url = "DCCOR/Network/Switching Protocols/Link Aggregation Control Protocol (LACP).md";
     $.get(`content/${url}`, (data) => {
@@ -115,8 +30,7 @@
       $('#content').html(html);
     });
   </script>
-  <!-- Include Bootstrap JS -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 </body>
 
 </html>
