@@ -10,7 +10,7 @@
 
   <!-- SEO Meta Tags -->
   <meta name="description"
-    content="The Docs is a collection of notes and documentation for various certifications and exams.">
+    content="The Docs is a collection of notes and documentation by Adam Spera for various certifications and exams. Including: CCNP Enterprise, CCNP DataCenter, ENCOR, ENAUTO, DCCOR, DCAUTO, and more on the way!">
   <meta name="keywords"
     content="Adam Spera, The Docs, Exam, Certification, Learning Resources, Cisco, DCCOR, DCAUTO, CCNP, CCNP Data Center">
   <meta name="author" content="Adam Spera">
@@ -23,7 +23,7 @@
 </head>
 
 <body>
-  <div id="sidebar">
+  <!-- <div id="sidebar">
 
     <section id="static-content">
 
@@ -31,25 +31,26 @@
         <img src="thedocslogo.png" width="55" height="55">
         <span>The Docs</span>
       </div>
-      <br>
 
-      <div class="sidebar-layout-header">
-        <div class="flex-item item-1" style="font-size: 19px; font-weight: 600;">Welcome</div>
-      </div>
+      <div class="sidebar-spacer"></div>
 
-      <div id="default_about" class="sidebar-widget active">
-        <div class="flex-item item-1">About</div>
-      </div>
-
-      <div id="default_resources" class="sidebar-widget ">
-        <div class="flex-item item-1">Resources</div>
-      </div>
+      <div id="search" class="btn btn-primary sidebar-button">Search Docs</div>
 
       <div class="sidebar-spacer"></div>
 
       <div class="sidebar-layout-header">
-        <div class="flex-item item-1">Documentation</div>
-        <a href="#" class="icon-search" id="search" data-bs-toggle="modal" data-bs-target="#searchModal">Search</a>
+        <div style="font-size: 19px; font-weight: 600;">Welcome</div>
+      </div>
+
+      <div id="explore" class="sidebar-widget active">
+        <div>Explore Topics</div>
+      </div>
+      <br>
+
+      <div class="sidebar-spacer"></div>
+
+      <div class="sidebar-layout-header">
+        <div>Documentation</div>
       </div>
 
     </section>
@@ -66,10 +67,25 @@
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
             <div class="modal-header">
-              <input type="text" class="form-control form-control-lg" id="searchInput" placeholder="Search...">
+              <table>
+                <tr>
+                  <td>
+                    <h3>Search Docs</h3>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p>Query all document names and associated topic tags.</p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="text" class="form-control form-control-lg" id="searchInput" placeholder="Search...">
+                  </td>
+                </tr>
+              </table>
             </div>
             <div class="modal-body">
-              <!-- Modal content goes here -->
               <div id="searchResults"></div>
             </div>
           </div>
@@ -78,7 +94,7 @@
 
     </section>
 
-  </div>
+  </div> -->
   <div id="content-border"></div>
 
   <div id="content"></div>
@@ -88,19 +104,19 @@
   <!-- Include Shutdown -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
   <!-- Include Primary JS -->
-  <script src="script.js"></script>
+  <!-- <script src="script.js"></script>
   <script src="search.js"></script>
-  <!-- Include Bootstrap JS -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+  <script src="explore.js"></script> -->
   <script>
-    const url = "DCCOR/Network/Switching Protocols.md";
+    const url = "DCCOR/Network/Switching Protocols/Link Aggregation Control Protocol (LACP).md";
     $.get(`content/${url}`, (data) => {
-        const converter = new showdown.Converter();
-        const html = converter.makeHtml(data);
-        $('#content').html(html);
+      const converter = new showdown.Converter();
+      const html = converter.makeHtml(data);
+      $('#content').html(html);
     });
   </script>
+  <!-- Include Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 
 </html>

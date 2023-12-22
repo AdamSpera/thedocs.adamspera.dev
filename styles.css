@@ -247,14 +247,75 @@ body {
 #content h2 {
   font-size: 2rem;
   font-weight: 700;
+  margin-bottom: 20px;
 }
 
 #content h3 {
   font-size: 1.6rem;
   font-weight: 600;
-  margin-left: 10px;
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 #content h4 {
   font-size: 1.4rem;
+  margin-left: 5px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* #content img {
+  max-width: 100%;
+  height: auto;
+  margin: 4px;
+} */
+
+#content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+#content table thead {
+  background-color: rgb(235, 242, 245);
+}
+
+#content table th {
+  padding: 10px;
+  text-align: left;
+  font-weight: 600;
+}
+
+#content table td {
+  padding: 10px;
+  border-bottom: 1px solid rgb(218, 218, 218);
+}
+
+#content main img {
+  max-width: 100%;
+  height: auto;
+  margin: 4px;
+
+}
+
+#content pre {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 0.9rem;
+  background-color: rgb(218, 236, 244);
+  border-radius: 10px;
+  padding: 20px;
+}
+
+#content pre span {
+  color: rgb(255, 38, 0);
+  font-size: 16px;
+}
+
+#content pre code span {
+  color: grey;
+  font-size: 16px;
+}
+
+#content pre code i {
+  color: grey;
 }
