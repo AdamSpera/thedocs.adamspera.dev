@@ -20,7 +20,7 @@ LACP is defined by the IEEE in the **802.3ad & 802.1AX** standards.
 ![Physical vs Physical](../../../../media/lacp_physical_logical.png)
 </main>
 
-### LACP Load Balancing
+### Load Balancing
 
 LACP load balancing uses a hash that returns a number typically between 0 and 7. **The hash is based on the source and destination MAC address, IP address, and TCP/UDP port numbers**. The hash is then used to determine which link in the bundle the packet will be sent out of.
 
