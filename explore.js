@@ -22,7 +22,7 @@ async function displayExplorePage() {
   explorePage.append('<h1>Explore Topics</h1>');
   explorePage.append('<p>Click on a topic to search for associated content.</p>');
   explorePage.append('<hr>');
-  explorePage.append('<input type="text" class="form-control form-control-lg" id="searchTopicsInput" placeholder="Search topics..."></input>');
+  explorePage.append('<input type="text" class="form-control form-control-lg" id="searchTopicsInput" placeholder="Filter topics..."></input>');
   explorePage.append('<br>');
   var topicResults = $('<div id="topicResults"></div>');
 
