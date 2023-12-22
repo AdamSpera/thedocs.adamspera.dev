@@ -13,11 +13,11 @@
 - [Link Aggregation Control Protocol (LACP)](#link-aggregation-control-protocol-lacp)
     - [Table of Contents](#table-of-contents)
   - [LACP Port Channels](#lacp-port-channels)
-    - [Benefits](#benefits)
-    - [Specifications](#specifications)
+    - [- Benefits](#--benefits)
+    - [- Specifications](#--specifications)
       - [Channel Modes](#channel-modes)
       - [Channel Compatibility](#channel-compatibility)
-    - [Configuration](#configuration)
+    - [- Configuration](#--configuration)
 
 ## LACP Port Channels
 
@@ -29,7 +29,7 @@ Link Aggregation Control Protocol (LACP) is a protocol that allows multiple phys
 
 **NOTE: LACP is defined by the IEEE in the 802.3ad & 802.1AX standards.**
 
-### Benefits
+### - Benefits
 
 Benefits and advantages of Port Channels:
 
@@ -41,7 +41,7 @@ Benefits and advantages of Port Channels:
 
 - Resiliency against physical link failures
 
-### Specifications
+### - Specifications
 
 The maximum number of ports in a channel depends on the exact switch hardware and software combination. For example, on the Cisco Nexus 9000 Series Switches, you can bundle up to 32 active links into a port channel.
 
@@ -109,7 +109,7 @@ On the Cisco Nexus 9000 platform, port channels can be configured on Layer 2 or 
   </tbody>
 </table>
 
-### Configuration
+### - Configuration
 
 <pre>
 <span>Enable LACP</span>
