@@ -247,7 +247,7 @@ body {
   padding-left: 40px;
   padding-right: 45px;
   padding-top: 25px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   background-color: rgba(240, 240, 240, 0.1);
 }
 
@@ -310,24 +310,35 @@ body {
   margin: 4px;
 }
 
+/* General code area */
 #content pre {
   font-family: 'Manrope', sans-serif !important;
-  font-size: 0.9rem;
+  font-size: 1rem;
+  letter-spacing: 1px;
   background-color: rgb(218, 236, 244);
   border-radius: 10px;
   padding: 20px;
 }
 
+/* Code section label */
 #content pre span {
-  color: rgb(255, 38, 0);
-  font-size: 16px;
+  color: rgb(255, 0, 0);
+  font-weight: 700;
 }
 
+/* Command text */
+#content pre code {
+  color: black;
+  font-weight: 600;
+}
+
+/* (Config) text */
 #content pre code span {
   color: grey;
   font-size: 16px;
 }
 
+/* Optional command syntax */
 #content pre code i {
   color: grey;
 }

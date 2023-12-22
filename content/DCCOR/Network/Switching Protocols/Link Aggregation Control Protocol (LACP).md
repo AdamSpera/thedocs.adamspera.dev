@@ -14,15 +14,24 @@
 
 Link Aggregation Control Protocol (LACP) is a protocol that allows multiple physical links to be bundled into one logical link. LACP allows a network device to negotiate an automatic bundling of links by sending LACP packets to the peer (directly connected device that also implements LACP).
 
+LACP is defined by the IEEE in the **802.3ad & 802.1AX** standards.
+
 <main>
 ![Physical vs Physical](../../../../media/lacp_physical_logical.png)
 </main>
 
-**NOTE: LACP is defined by the IEEE in the 802.3ad & 802.1AX standards.**
+### LACP Load Balancing
+
+LACP load balancing uses a hash that returns a number typically between 0 and 7. **The hash is based on the source and destination MAC address, IP address, and TCP/UDP port numbers**. The hash is then used to determine which link in the bundle the packet will be sent out of.
+
+Due to the law of averages, it is always advised to use a number of links that is a power of 2 (2, 4, 8, 16, etc.) to ensure that the load balancing is as even as possible.
+
+![LACP Hash Assignment](../../../../media/lacp_hash_assignment_1.png)
+![LACP Hash Assignment 2](../../../../media/lacp_hash_assignment_2.png)
 
 ## Benefits
 
-Benefits and advantages of Port Channels:
+Benefits and advantages of Port-Channels:
 
 - Optimized bandwidth usage
 
@@ -34,13 +43,18 @@ Benefits and advantages of Port Channels:
 
 ## Specifications
 
-The maximum number of ports in a channel depends on the exact switch hardware and software combination. For example, on the Cisco Nexus 9000 Series Switches, you can bundle up to 32 active links into a port channel.
+The following items must match on all ports in a Port-Channel:
+- Speed & Duplex
+- VLAN Details
+- Port-Channel Number
+- Port-Channel Protocol (LACP/Static)
+- Port-Channel Mode (active/passive/on)
 
-**NOTE: Nexus 9k can bundle up to 32 active links in a port channel.**
+### Data Center Specifics
 
-On the Cisco Nexus 9000 platform, port channels can be configured on Layer 2 or Layer 3 interfaces.
+Nexus 9000 series devices support Port-Channels for up to **36 active links**, on both Layer 2 and Layer 3 interfaces.
 
-**NOTE: Nexus 9k port channels can be configured on layer 2 and layer 3 interfaces.**
+The protocol PAgP is not supported on the NX-OS platform.
 
 ### Channel Modes
 
@@ -102,6 +116,8 @@ On the Cisco Nexus 9000 platform, port channels can be configured on Layer 2 or 
 
 ## Configuration
 
+Configurations added to the Port-Channel interface will be applied to all physical interfaces in the channel group. (other than port-channel related commands, trunking, and shutdown)
+
 <pre>
 <span>Enable LACP</span>
 <code><span>(config)#</span> feature lacp</code>
@@ -109,6 +125,6 @@ On the Cisco Nexus 9000 platform, port channels can be configured on Layer 2 or 
 
 <pre>
 <span>Configure LACP</span>
-<code><span>(config)#</span>interface <i>type slot / port</i></code>
-<code><span>(config-if)#</span>channel-group <i>number</i> mode { active | on | passive } </code>
+<code><span>(config)#</span> interface <i>type slot / port</i></code>
+<code><span>(config-if)#</span> channel-group <i>number</i> mode { active | on | passive }</code>
 </pre>
