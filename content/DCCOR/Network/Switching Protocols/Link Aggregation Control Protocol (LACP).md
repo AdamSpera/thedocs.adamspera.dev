@@ -39,6 +39,7 @@ Due to the law of averages, it is always advised to use a number of links that i
 ## Specifications
 
 The following items must match on all ports in a Port-Channel:
+- Media Type
 - Speed & Duplex
 - VLAN Details
 - Port-Channel Number
