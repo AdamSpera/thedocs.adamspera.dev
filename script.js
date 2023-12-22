@@ -148,5 +148,14 @@ async function fetchAndDisplayMarkdown(url) {
         const converter = new showdown.Converter();
         const html = converter.makeHtml(data);
         $('#content').html(html);
+
+        $("#content img[alt='Keyword']").click(function () {
+            var badgeText = $(this).attr('src');
+            badgeText = decodeURIComponent(badgeText.replace(/\+/g, ' '));
+            badgeText = badgeText.substring(badgeText.lastIndexOf('/') + 1);
+            badgeText = badgeText.split('-')[0];
+            $('#searchModal').modal('show');
+            $('#searchInput').val(badgeText.replace(/%20/g, ' ')).trigger('input');;
+        });
     });
 }
