@@ -44,12 +44,9 @@ function fileNameSearch(query) {
     var formattedDirectory = directory.replace(/\//g, ' / ');
 
     // Make the query bold in the file name
-    var boldedFileName = fileName.replace(new RegExp(query, 'gi'), '<strong>$&</strong>');
+    var boldedFileName = fileName.replace(new RegExp(query, 'gi'), '<strong>$&</strong>').replace('.md', '');
 
-    // Combine the directory and the bolded file name
-    var formattedFilePath = formattedDirectory + ' / ' + boldedFileName.replace('.md', '');
-
-    let result = $('<p class="result-blob"> <img src="icons/file-solid.svg" alt="File" class="icon-result">' + formattedFilePath + '</p>');
+    let result = $('<p class="result-blob"> <span style="font-size: 13px">' + formattedDirectory + '</span> <br> <img src="icons/file-solid.svg" alt="File" class="icon-result">' + boldedFileName + '</p>');
     result.click(async function () {
       console.log(filePath);
       $("img[src='icons/file-open.svg']").attr("src", "icons/file-solid.svg");
@@ -92,7 +89,12 @@ async function fileKeySearch(input) {
     let formattedFilePath = url.replace(/_/g, ' ').replace('.md', '');
     formattedFilePath = formattedFilePath.replace(/\//g, ' / '); // Add spaces around '/'
     let result = $('<p class="result-blob" style="display: flex; flex-wrap: wrap;"></p>');
-    let textElement = $('<span style="padding-right: 11px">' + formattedFilePath + '</span>');
+    
+    let lastSlashIndex = formattedFilePath.lastIndexOf(' / ');
+    let filePath = formattedFilePath.substring(0, lastSlashIndex);
+    let textAfterLastSlash = formattedFilePath.substring(lastSlashIndex + 3);
+
+    let textElement = $('<span style="padding-right: 11px"> <span style="font-size: 13px">' + filePath + '</span> <br> <span>' + textAfterLastSlash + '</span></span>');
     result.append(textElement);
     let badgesElement = $('<span></span>');
     for (let badgeText of badges) {
