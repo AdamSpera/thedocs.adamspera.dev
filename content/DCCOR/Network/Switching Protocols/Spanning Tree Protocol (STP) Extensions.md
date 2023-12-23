@@ -5,6 +5,7 @@
 
 ![Keyword](https://img.shields.io/badge/STP%20Extensions-darkgreen)
 ![Keyword](https://img.shields.io/badge/Spanning%20Tree%20Protocol-darkgreen)
+![Keyword](https://img.shields.io/badge/STP-darkgreen)
 ![Keyword](https://img.shields.io/badge/STP%20Edge-darkgreen)
 ![Keyword](https://img.shields.io/badge/BPDU%20Guard-darkgreen)
 ![Keyword](https://img.shields.io/badge/BPDU%20Filter-darkgreen)

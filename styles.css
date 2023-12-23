@@ -19,11 +19,15 @@ body {
 #sidebar {
   width: auto;
   min-width: 240px;
-  max-width: 290px;
+  max-width: auto;
   height: 100vh;
   letter-spacing: 0.2px;
   flex-shrink: 0;
   user-select: none;
+}
+
+.sidebar-width {
+  max-width: 290px;
 }
 
 .sidebar-title {
@@ -44,7 +48,6 @@ body {
 
 .sidebar-layout-header {
   margin-top: 12px;
-
   font-size: large;
   font-weight: 600;
   padding-left: 15px;
@@ -74,7 +77,7 @@ body {
 }
 
 .sidebar-button {
-  width: 83%;
+  width: 82%;
   margin-left: 20px;
   margin-top: 18px;
   margin-bottom: 18px;
@@ -90,6 +93,12 @@ body {
 
 .sidebar-spacer.extra {
   margin: 10px 15px;
+}
+
+.sidebar-link {
+  text-decoration: none;
+  font-size: 12px;
+  color: #3aa0d5;
 }
 
 /* SIDEBAR DYNAMIC WIDGETS */
@@ -119,7 +128,10 @@ body {
 
 .has-file {
   /* REMOVE IF FILE SIZE ISSUES */
-  line-height: 1.8 !important;
+  letter-spacing: 0.3px !important;
+  line-height: 1.5 !important;
+  margin-top: 8px !important;
+  font-size: 16px;
 }
 
 /* SIDEBAR ICONS */

@@ -17,12 +17,25 @@ function setupSidebarWidgetClickEvent() {
     });
 }
 
+function setupSidebarLink () {
+    $('.sidebar-link').on('click', function (event) {
+        event.preventDefault();
+        $('#sidebar').toggleClass('sidebar-width');
+        if ($('.sidebar-link').text() === 'Expand View') {
+            $('.sidebar-link').text('Minify View');
+        } else {
+            $('.sidebar-link').text('Expand View');
+        }
+    });
+}
+
 async function fetchAndDisplayDirectoryContents() {
     try {
         const structure = await fetchDirectoryContents(base_url);
         displayTree(structure, $('#tree'));
         $('li').eq(0).click();
-        $("li:has(img[alt='File']):last").addClass("has-file");
+        $("li:has(img[alt='File']):not(:has(li))").addClass("has-file");
+        setupSidebarLink();
     } catch (error) {
         console.error(error);
         alert('Failed to fetch repository structure');
@@ -158,5 +171,6 @@ async function fetchAndDisplayMarkdown(url) {
             $('#searchModal').modal('show');
             $('#searchInput').val(badgeText.replace(/%20/g, ' ')).trigger('input');;
         });
+        $('#sidebar').addClass('sidebar-width');
     });
 }

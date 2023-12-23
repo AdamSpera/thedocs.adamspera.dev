@@ -9,6 +9,7 @@ function setupSidebarExploreClickEvent() {
     $("img[src='icons/file-open.svg']").attr("src", "icons/file-solid.svg");
     $(this).addClass('active');
     displayExplorePage();
+    $('#sidebar').addClass('sidebar-width');
   });
 }
 
