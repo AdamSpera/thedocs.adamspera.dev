@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
   <title>Writing Preview</title>
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
@@ -14,21 +13,20 @@
 
   <div id="content"></div>
 
-  <!-- Include jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <!-- Include Shutdown -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
   <!-- Include Bootstrap -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  
   <!-- Inline Preview JS -->
   <script>
     const url = "DCCOR/Network/Switching Protocols/Link Aggregation Control Protocol (LACP).md";
-    $.get(`content/${url}`, (data) => {
-      const converter = new showdown.Converter();
-      const html = converter.makeHtml(data);
-      $('#content').html(html);
-    });
+    fetch(`content/${url}`)
+      .then(response => response.text())
+      .then(data => {
+        const converter = new showdown.Converter();
+        const html = converter.makeHtml(data);
+        document.getElementById('content').innerHTML = html;
+      });
   </script>
 
 </body>
