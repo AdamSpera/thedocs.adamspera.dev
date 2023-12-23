@@ -21,6 +21,7 @@ async function fetchAndDisplayDirectoryContents() {
     try {
         const structure = await fetchDirectoryContents(base_url);
         displayTree(structure, $('#tree'));
+        $('li').eq(0).click();
         $("li:has(img[alt='File']):last").addClass("has-file");
     } catch (error) {
         console.error(error);
