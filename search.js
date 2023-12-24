@@ -2,131 +2,169 @@ let directoryStructure = {};
 
 $(document).ready(function () {
 
+  // When the search button is clicked...
   $("#search").click(async function (event) {
     event.preventDefault();
+
+    // Fetch the directory structure from cache and so on
     directoryStructure = await fetchDirectoryContents(base_url);
+
+    // Show the search modal
     $("#searchModal").modal('show');
+
     // Clear the search input field and manually trigger the input event
     $("#searchInput").val('');
+
+    // Clear the search results of any extra results
     $("#searchResults").empty();
   });
 
+  // When search query changes...
   $("#searchInput").on('input', async function () {
-
     var query = $(this).val();
-    if (query === '') {
-      $("#searchResults").empty();
-      return;
-    }
+
+    // Clear the search results
     $("#searchResults").empty();
 
-    fileNameSearch(query);
-    await fileKeySearch(query);
+    // If the query is not empty, search for the query
+    if (query !== '') {
+      fileNameSearch(query);
+      await fileKeySearch(query);
+    }
   });
 
 });
 
+function handleResultClick(filePath) {
+  // Parameter file path below:
+  // DCCOR/Network/Switching Protocols/Some File Name.md
+
+  return async function () {
+    // Get and display the markdown file
+    await fetchAndDisplayMarkdown(filePath);
+
+    // Change all file icons to be closed icons
+    $("img[src='icons/file-open.svg']").attr("src", "icons/file-solid.svg");
+
+    // Remove the active class from the sidebar widgets
+    $('.sidebar-widget, .tree li').removeClass('active');
+
+    // Hide the search modal
+    $('#searchModal').modal('hide');
+  }
+}
+
+function returnResultBlob(filePath) {
+  // Parameter file path below:
+  // /DCCOR/Network/Switching Protocols/Rapid Per Vlan Spanning Tree Plus (Rapid PVST+).md
+
+  // Remove the first splash from the file path
+  var filePath = filePath.substring(1);
+
+  // Split the file path into the directory and the file name
+  var lastSlashIndex = filePath.lastIndexOf('/');
+  var directory = filePath.substring(0, lastSlashIndex);
+  var fileName = filePath.substring(lastSlashIndex + 1).replace('.md', '');
+
+  // Add spaces around the slashes in the directory
+  var formattedDirectory = directory.replace(/\//g, ' / ');
+
+  // Create a new paragraph element with the class 'result-blob'
+  let resultElement = $(`
+    <p class="result-blob">
+      <span style="font-size: 13px">${formattedDirectory}</span><br>
+      <img src="icons/file-solid.svg" alt="File" class="icon-result">${fileName}
+    </p>
+  `);
+
+  // Add a click event listener to the result element
+  resultElement.click(handleResultClick(filePath));
+
+  // Return the result element
+  return resultElement;
+};
+
 function fileNameSearch(query) {
   // Search the directory structure for files that contain the query
-  var searchResults = searchFiles(directoryStructure, query);
+  var matchingFiles = searchFiles(directoryStructure, query);
 
-  // Display the search results
-  searchResults.forEach((result) => {
-    // Remove the first character from the result
-    var filePath = result.substring(1);
+  // For each matching file name...
+  matchingFiles.forEach((filePath) => {
 
-    // Split the file path into the directory and the file name
-    var lastSlashIndex = filePath.lastIndexOf('/');
-    var directory = filePath.substring(0, lastSlashIndex);
-    var fileName = filePath.substring(lastSlashIndex + 1);
-
-    // Add spaces around the slashes in the directory
-    var formattedDirectory = directory.replace(/\//g, ' / ');
-
-    // Make the query bold in the file name
-    var boldedFileName = fileName.replace(new RegExp(query, 'gi'), '<strong>$&</strong>').replace('.md', '');
-
-    // Create a new paragraph element with the class 'result-blob'
-    let resultElement = $(`
-      <p class="result-blob">
-        <span style="font-size: 13px">${formattedDirectory}</span><br>
-        <img src="icons/file-solid.svg" alt="File" class="icon-result">${boldedFileName}
-      </p>
-    `);
-
-    // Add a click event listener to the result element
-    resultElement.click(async function () {
-      console.log(filePath);
-      $("img[src='icons/file-open.svg']").attr("src", "icons/file-solid.svg");
-      await fetchAndDisplayMarkdown(filePath);
-      $('.sidebar-widget, .tree li').removeClass('active');
-      $('#searchModal').modal('hide');
-    });
+    // Create a new result element
+    const resultElement = returnResultBlob(filePath);
 
     // Append the result element to the search results
     $("#searchResults").append(resultElement);
+
   });
-}
+
+};
 
 async function fileKeySearch(query) {
-  query = query.replace(/ /g, '%20');
+
+  // Search the directory structure for all files
   let mdFiles = searchFiles(directoryStructure, '.md');
+
+  // For every md file, check for matching topics...
   let matchingFiles = new Map();
+  for (let filePath of mdFiles) {
 
-  for (let url of mdFiles) {
-    url = url.replace('/', ''); // Remove the first '/'
-    let data = await $.get(`content/${url}`);
+    // Get the markdown data from the file
+    let markdownData = await $.get(`content${filePath}`);
+
+    // Convert the markdown data to HTML
     const converter = new showdown.Converter();
-    const html = converter.makeHtml(data);
+    const html = converter.makeHtml(markdownData);
 
+    // For every image in the HTML...
     $(html).find('img').each(function () {
+
+      // Get the image source
       let src = $(this).attr('src');
+
+      // Replace spaces with '%20' and make the query lowercase
+      query = query.replace(/ /g, '%20');
       query = query.toLowerCase();
+
+      // If the image is a topic badge...
       if (src.includes("https://img.shields.io/badge/") && src.includes("-darkgreen")) {
+
+        // Get the badge text and make it lowercase
         var badgeText = src.split("https://img.shields.io/badge/")[1].split("-darkgreen")[0];
         var lowerBadgeText = badgeText.toLowerCase();
+
+        // If the badge text contains the query...
         if (lowerBadgeText.includes(query)) {
-          if (!matchingFiles.has(url)) {
-            matchingFiles.set(url, []);
+          if (!matchingFiles.has(filePath)) {
+            matchingFiles.set(filePath, []);
           }
-          matchingFiles.get(url).push(badgeText);
+          matchingFiles.get(filePath).push(badgeText);
         }
       }
+
     });
-  }
-  for (let [url, badges] of matchingFiles.entries()) {
-    // Replace underscores with spaces and remove '.md' from the URL
-    let formattedFilePath = url.replace(/_/g, ' ').replace('.md', '');
 
-    // Add spaces around '/'
-    formattedFilePath = formattedFilePath.replace(/\//g, ' / ');
+  }; // End of looking for markdown files that have matching topics.
 
-    // Find the last index of ' / ' in the formatted file path
-    let lastSlashIndex = formattedFilePath.lastIndexOf(' / ');
+  // For every matching file...
+  for (let [filePath, badges] of matchingFiles.entries()) {
 
-    // Get the file path and the text after the last slash
-    let filePath = formattedFilePath.substring(0, lastSlashIndex);
-    let textAfterLastSlash = formattedFilePath.substring(lastSlashIndex + 3);
+    // Create a new result element
+    var resultElement = returnResultBlob(filePath);
 
-    // Create a new paragraph element with the class 'result-blob'
-    let result = $(
-      `<p class="result-blob">
-        <span style="font-size: 13px">${filePath}</span><br>
-        <img src="icons/lightbulb-solid.svg" alt="File" class="icon-result">${textAfterLastSlash}
-      </p>`
-    );
-
+    // Create a new span element for the badges
     let badgesElement = $('<span><br></span>');
+    // Append every badge img to the badge span
     for (let badgeText of badges) {
       badgesElement.append('<img src="https://img.shields.io/badge/' + badgeText + '-darkgreen" alt="Badge" class="icon-tag">');
     }
-    result.append(badgesElement);
-    result.click(async function () {
-      await fetchAndDisplayMarkdown(url);
-      $('.sidebar-widget, .tree li').removeClass('active');
-      $('#searchModal').modal('hide');
-    });
-    $("#searchResults").append(result);
+
+    // Append the badges element to the result element
+    resultElement.append(badgesElement);
+
+    // Append the result element to the search results
+    $("#searchResults").append(resultElement);
   }
 }
 
