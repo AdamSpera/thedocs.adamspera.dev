@@ -141,8 +141,10 @@ function handleFile(li, currentPath, key) {
         var newIcon = currentIcon === 'icons/file-solid.svg' ? 'icons/file-open.svg' : 'icons/file-solid.svg';
         img.attr('src', newIcon);
 
+        $('.sidebar-link').text('Expand View');
         $('.sidebar-widget, .tree li').removeClass('active');
         li.addClass('active');
+
         fetchAndDisplayMarkdown(currentPath);
     });
 }

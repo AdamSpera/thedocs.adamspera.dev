@@ -5,6 +5,7 @@ $(document).ready(function () {
 
 function setupSidebarExploreClickEvent() {
   $('#explore').on('click', function () {
+    $('.sidebar-link').text('Expand View');
     $('.sidebar-widget, li').removeClass('active');
     $("img[src='icons/file-open.svg']").attr("src", "icons/file-solid.svg");
     $(this).addClass('active');

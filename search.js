@@ -6,6 +6,9 @@ $(document).ready(function () {
   $("#search").click(async function (event) {
     event.preventDefault();
 
+    // Minify the sidebar
+    $('.sidebar-link').text('Expand View');
+
     // Fetch the directory structure from cache and so on
     directoryStructure = await fetchDirectoryContents(base_url);
 
