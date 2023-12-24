@@ -54,7 +54,7 @@ function handleResultClick(filePath) {
   }
 }
 
-function returnResultBlob(filePath) {
+function returnResultBlob(filePath, type='file') {
   // Parameter file path below:
   // /DCCOR/Network/Switching Protocols/Rapid Per Vlan Spanning Tree Plus (Rapid PVST+).md
 
@@ -73,7 +73,7 @@ function returnResultBlob(filePath) {
   let resultElement = $(`
     <p class="result-blob">
       <span style="font-size: 13px">${formattedDirectory}</span><br>
-      <img src="icons/file-solid.svg" alt="File" class="icon-result">${fileName}
+      <img src="icons/${type === 'topic' ? 'lightbulb-solid' : 'file-solid'}.svg" alt="File" class="icon-result">${fileName}
     </p>
   `);
 
@@ -151,7 +151,7 @@ async function fileKeySearch(query) {
   for (let [filePath, badges] of matchingFiles.entries()) {
 
     // Create a new result element
-    var resultElement = returnResultBlob(filePath);
+    var resultElement = returnResultBlob(filePath, 'topic');
 
     // Create a new span element for the badges
     let badgesElement = $('<span><br></span>');
