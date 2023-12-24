@@ -1,20 +1,12 @@
 const user = "adamspera";
-const repo = "docs.adamspera.dev";
+const repo = "thedocs.adamspera.dev";
 const start_folder = "content";
 const base_url = `https://api.github.com/repos/${user}/${repo}/contents/${start_folder}`;
 
 $(document).ready(initializeApp);
 
 function initializeApp() {
-    setupSidebarWidgetClickEvent();
     fetchAndDisplayDirectoryContents();
-}
-
-function setupSidebarWidgetClickEvent() {
-    $('.sidebar-widget').on('click', function () {
-        $('.sidebar-widget').removeClass('active');
-        $(this).addClass('active');
-    });
 }
 
 function setupSidebarLink () {
@@ -42,15 +34,15 @@ async function fetchAndDisplayDirectoryContents() {
     }
 }
 
-async function fetchDirectoryContents(url) {
+async function fetchDirectoryContents(github_url) {
     const cache = await caches.open('docs-cache');
-    const cachedResponse = await getCachedResponse(cache, url);
+    const cachedResponse = await getCachedResponse(cache, github_url);
 
     let response;
     if (cachedResponse) {
         response = await cachedResponse.json();
     } else {
-        response = await fetchAndCacheResponse(cache, url);
+        response = await fetchAndCacheResponse(cache, github_url);
     }
 
     return await buildDirectoryStructure(response);
@@ -70,11 +62,9 @@ async function getCachedResponse(cache, url) {
 }
 
 async function fetchAndCacheResponse(cache, url) {
-    const start = Date.now();
     const response = await $.ajax({ url: url, method: 'GET' });
     await cache.put(url, new Response(JSON.stringify(response)));
     await cache.put(url + '-time', new Response(Date.now().toString()));
-    const end = Date.now();
     return response;
 }
 
