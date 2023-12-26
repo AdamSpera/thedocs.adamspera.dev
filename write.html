@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Write Docs</title>
+
+  <!-- Mobile Meta Tags -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="includes/css/styles.css">
+
+</head>
+
+<body>
+
+  <!-- Top navigation bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light top-bar">
+    <div class="container">
+
+      <a class="navbar-brand">
+        <span id="top-bar-title" class="top-bar-title">The Docs - Adam Spera</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+            <a class="nav-link top-bar-link" id="search">[ Search ]</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link top-bar-link" id="explore">[ File Explorer ]</a>
+          </li>
+        </ul>
+        <button class="btn btn-outline-primary my-2 my-lg-0 top-bar-button" id="github-link">Learn More</button>
+      </div>
+
+    </div>
+  </nav>
+
+  <!-- Document viewer -->
+  <section id="section-documentviewer" class="main-body">
+    <div class="container" id="content"></div>
+  </section>
+
+  <!-- Include jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Include Shutdown -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
+  <!-- Include Bootstrap JS -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+  <!-- WRITE HTML SCRIPT -->
+  <script>
+    const url = "DCCOR/Network/Switching Protocols/Link Aggregation Control Protocol (LACP).md"
+    fetch(`content/${url}`)
+      .then(response => response.text())
+      .then(data => {
+        const converter = new showdown.Converter();
+        const html = converter.makeHtml(data);
+        document.getElementById('content').innerHTML = html;
+      });
+  </script>
+</body>
+
+</html>
