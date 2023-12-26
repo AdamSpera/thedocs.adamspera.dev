@@ -22,13 +22,6 @@ function setupEventHandlers() {
     });
 }
 
-// This function clears the 'structure' cache
-async function clearCache() {
-    const cache = await caches.open('docs-cache');
-    await cache.delete('structure');
-    alert('Cache cleared!');
-}
-
 // This function fetches and displays the directory contents
 async function fetchAndDisplayDirectoryContents() {
     try {
