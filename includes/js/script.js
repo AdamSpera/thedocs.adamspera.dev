@@ -7,6 +7,10 @@ $(document).ready(initializeApp);
 
 function initializeApp() {
     fetchAndDisplayDirectoryContents();
+
+    $('#github-link').click(function() {
+        window.location.href = "https://github.com/AdamSpera/thedocs.adamspera.dev";
+    });
 }
 
 async function fetchAndDisplayDirectoryContents() {
