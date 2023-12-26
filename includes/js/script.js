@@ -26,14 +26,18 @@ function setupEventHandlers() {
 async function fetchAndDisplayDirectoryContents() {
     try {
         const cache = await caches.open('docs-cache');
-        let structure = await getCachedStructure(cache, 'structure');
+        let cachedData = await getCachedStructure(cache, 'structure');
 
-        if (!structure) {
-            structure = await fetchDirectoryContents(base_url);
-            await cacheStructure(cache, 'structure', structure);
+        if (!cachedData || isOverADayOld(cachedData.timestamp)) {
+            const structure = await fetchDirectoryContents(base_url);
+            cachedData = {
+                timestamp: Date.now(),
+                structure: structure
+            };
+            await cacheStructure(cache, 'structure', cachedData);
         }
 
-        displayTree(structure, $('#tree'));
+        displayTree(cachedData.structure, $('#tree'));
         $('li').eq(2).click();
     } catch (error) {
         console.error(error);
@@ -61,8 +65,14 @@ async function getCachedStructure(cache, key) {
     return cachedResponse ? await cachedResponse.json() : null;
 }
 
-async function cacheStructure(cache, key, structure) {
-    await cache.put(key, new Response(JSON.stringify(structure)));
+function isOverADayOld(timestamp) {
+    const oneDay = 24 * 60 * 60 * 1000; // milliseconds in a day
+    const now = Date.now();
+    return now - timestamp > oneDay;
+}
+
+async function cacheStructure(cache, key, data) {
+    await cache.put(key, new Response(JSON.stringify(data)));
 }
 
 async function fetchAndDisplayMarkdown(url) {
