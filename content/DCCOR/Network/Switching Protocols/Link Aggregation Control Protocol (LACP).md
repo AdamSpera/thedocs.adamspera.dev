@@ -16,9 +16,7 @@ Link Aggregation Control Protocol (LACP) is a protocol that allows multiple phys
 
 LACP is defined by the IEEE in the **802.3ad & 802.1AX** standards.
 
-<main>
-![Physical vs Physical](../../../../media/lacp_physical_logical.png)
-</main>
+<main>![Physical vs Physical](../../../../media/lacp_physical_logical.png)</main>
 
 ### Benefits
 
@@ -33,8 +31,8 @@ LACP load balancing uses a hash that returns a number typically between 0 and 7.
 
 Due to the law of averages, it is always advised to use a number of links that is a power of 2 (2, 4, 8, 16, etc.) to ensure that the load balancing is as even as possible.
 
-![LACP Hash Assignment](../../../../media/lacp_hash_assignment_1.png)
-![LACP Hash Assignment 2](../../../../media/lacp_hash_assignment_2.png)
+<main>![LACP Hash Assignment](../../../../media/lacp_hash_assignment_1.png)</main>
+<main>![LACP Hash Assignment 2](../../../../media/lacp_hash_assignment_2.png)</main>
 
 ## Specifications
 

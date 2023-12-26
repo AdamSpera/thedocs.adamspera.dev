@@ -6,9 +6,6 @@ $(document).ready(function () {
   $("#search").click(async function (event) {
     event.preventDefault();
 
-    // Minify the sidebar
-    $('.sidebar-link').text('Expand View');
-
     // Fetch the directory structure from cache and so on
     directoryStructure = await fetchDirectoryContents(base_url);
 
@@ -43,15 +40,10 @@ function handleResultClick(filePath) {
   // DCCOR/Network/Switching Protocols/Some File Name.md
 
   return async function () {
+    // Hide the file explorer section
+    $('#section-fileexplorer').hide();
     // Get and display the markdown file
     await fetchAndDisplayMarkdown(filePath);
-
-    // Change all file icons to be closed icons
-    $("img[src='icons/file-open.svg']").attr("src", "icons/file-solid.svg");
-
-    // Remove the active class from the sidebar widgets
-    $('.sidebar-widget, .tree li').removeClass('active');
-
     // Hide the search modal
     $('#searchModal').modal('hide');
   }

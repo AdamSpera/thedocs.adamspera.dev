@@ -7,104 +7,68 @@
   font-family: 'Manrope', sans-serif !important;
 }
 
-body {
-  background-color: white;
-  margin: 0;
-  padding: 0;
+/* TOP NAV BAR */
+
+.top-bar,
+.top-bar-link,
+.top-bar-title {
+  font-family: 'Roboto Mono', sans-serif;
+  font-size: 15px;
+  line-height: 120%;
+  color: #171717;
+  background-color: transparent;
+}
+
+.top-bar {
   display: flex;
-}
-
-/* GENERAL SIDEBAR */
-
-#sidebar {
-  width: auto;
-  min-width: 240px;
-  max-width: auto;
-  height: 100vh;
-  letter-spacing: 0.2px;
-  flex-shrink: 0;
-  user-select: none;
-}
-
-.sidebar-width {
-  max-width: 290px;
-}
-
-.sidebar-title {
-  /* border-bottom: rgb(218, 218, 218) solid 1px; */
-  color: black;
-  font-size: 1.5em;
-  margin: 0;
-  display: flex;
+  justify-content: flex-end;
   align-items: center;
-  padding: 10px;
+  border-bottom: 1px solid #171717;
+  padding: 15px 32px;
+  margin-bottom: 2rem;
 }
 
-.sidebar-title>span {
-  font-weight: 700;
-  font-size: 26px;
-  margin-right: 11px;
+.top-bar-link,
+.top-bar-title {
+  letter-spacing: .8px;
+  text-transform: uppercase;
 }
 
-.sidebar-layout-header {
-  margin-top: 12px;
-  font-size: large;
-  font-weight: 600;
-  padding-left: 15px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  cursor: default;
-}
-
-/* SIDEBAR WIDGETS */
-
-.sidebar-widget {
-  background-color: #fff;
-  padding-left: 16px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.sidebar-widget:hover {
-  background-color: rgb(246, 253, 247);
-  color: rgb(58, 160, 213);
+.top-bar-link:hover {
   cursor: pointer;
 }
 
-.sidebar-widget.active {
-  background-color: rgb(235, 242, 245) !important;
-  color: rgb(85, 168, 69) !important;
+.top-bar-title {
+  font-weight: 500;
+  cursor: default !important;
+  text-decoration: none !important;
 }
 
-.sidebar-button {
-  width: 82%;
-  margin-left: 20px;
-  margin-top: 18px;
-  margin-bottom: 18px;
+.top-bar-button {
+  letter-spacing: .7px;
+  width: 150px;
+  border-radius: 0px;
+  border-color: #171717;
+  color: #171717;
 }
 
-.sidebar-button:hover {
-  cursor: pointer;
+.top-bar-button:hover {
+  color: #fff;
+  background-color: #171717;
+  border-color: #fff;
 }
 
-.sidebar-spacer {
-  border-bottom: rgb(218, 218, 218) solid 1px;
+/* MAIN BODY */
+
+.main-body {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
-.sidebar-spacer.extra {
-  margin: 10px 15px;
-}
-
-.sidebar-link {
-  text-decoration: none;
-  font-size: 12px;
-  color: #3aa0d5;
-}
-
-/* SIDEBAR DYNAMIC WIDGETS */
+/* FILE EXPLORER */
 
 .tree {
-  letter-spacing: 0.4px;
+  letter-spacing: 0.55px;
   margin-top: 6px;
   padding: 0px;
 }
@@ -126,12 +90,11 @@ body {
   color: rgb(85, 168, 69) !important;
 }
 
-.has-file {
-  /* REMOVE IF FILE SIZE ISSUES */
-  letter-spacing: 0.3px !important;
-  line-height: 1.5 !important;
-  margin-top: 8px !important;
-  font-size: 16px;
+.file:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-thickness: 0.4px;
+  text-underline-offset: 6px;
 }
 
 /* SIDEBAR ICONS */
@@ -166,35 +129,6 @@ body {
 .icon-explore:hover {
   cursor: pointer;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
-}
-
-/* WIDGET FLEX BOX */
-
-.flex-container {
-  display: flex;
-}
-
-.flex-item {
-  flex: 1;
-  padding: 10px;
-}
-
-.item-1 {
-  padding: 0;
-  margin: 0;
-  flex-basis: 85%;
-}
-
-.item-2 {
-  padding: 0;
-  margin: 0;
-  flex-basis: 15%;
-}
-
-/* SIDEBAR SIDE BORDER */
-
-#content-border {
-  border-left: 1px solid rgb(218, 218, 218);
 }
 
 /* MODEL STYLES */
@@ -244,27 +178,13 @@ body {
   font-weight: 400;
 }
 
-/* EXPLORE PAGE */
-
-.explore-page p {
-  letter-spacing: 0.2;
-}
-
-/* CONTENT PAGE */
+/* DOCUMENT VIEWER */
 
 #content {
   font-family: Lunasima, sans-serif !important;
   letter-spacing: 0.7px;
-  flex: 1;
-  padding-left: 40px;
-  padding-right: 50px;
-  padding-top: 25px;
-  margin-bottom: 25px;
+  margin-bottom: 40px;
   background-color: rgba(240, 240, 240, 0.1);
-}
-
-#content img[alt="Keyword"]:hover {
-  cursor: pointer;
 }
 
 #content h1 {
@@ -314,6 +234,10 @@ body {
 #content table td {
   padding: 10px;
   border-bottom: 1px solid rgb(218, 218, 218);
+}
+
+#content main {
+  display: inline;
 }
 
 #content main img {
