@@ -1,20 +1,3 @@
-$('#explore').click(function () {
-  $('#section-documentviewer').empty();
-  $('#section-fileexplorer').show();
-});
-
-async function buildDirectoryStructure(response) {
-  let directoryStructure = {};
-  for (let item of response) {
-    if (item.type === 'file') {
-      directoryStructure[item.name] = 'file';
-    } else if (item.type === 'dir') {
-      directoryStructure[item.name] = await fetchDirectoryContents(item.url);
-    }
-  }
-  return directoryStructure;
-}
-
 function displayTree(structure, parentElement) {
   parentElement.empty();
   createTree(structure, parentElement);

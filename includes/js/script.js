@@ -6,17 +6,33 @@ const base_url = `https://api.github.com/repos/${user}/${repo}/contents/${start_
 $(document).ready(initializeApp);
 
 function initializeApp() {
+    setupEventHandlers();
     fetchAndDisplayDirectoryContents();
+}
 
-    $('#github-link').click(function() {
-        window.location.href = "https://github.com/AdamSpera/thedocs.adamspera.dev";
+function setupEventHandlers() {
+    $('#github-link').click(() => window.location.href = "https://github.com/AdamSpera/thedocs.adamspera.dev");
+    $('#explore').click(() => {
+        $('#section-documentviewer').empty();
+        $('#section-fileexplorer').show();
+    });
+    $('#clear-cache').click(async () => {
+        const cache = await caches.open('docs-cache');
+        await cache.delete('structure');
+        alert('Cache cleared!');
     });
 }
 
 async function fetchAndDisplayDirectoryContents() {
     try {
-        const structure = await fetchDirectoryContents(base_url);
-        console.log(structure);
+        const cache = await caches.open('docs-cache');
+        let structure = await getCachedStructure(cache, 'structure');
+
+        if (!structure) {
+            structure = await fetchDirectoryContents(base_url);
+            await cacheStructure(cache, 'structure', structure);
+        }
+
         displayTree(structure, $('#tree'));
         $('li').eq(2).click();
     } catch (error) {
@@ -25,38 +41,28 @@ async function fetchAndDisplayDirectoryContents() {
     }
 }
 
-async function fetchDirectoryContents(github_url) {
-    const cache = await caches.open('docs-cache');
-    const cachedResponse = await getCachedResponse(cache, github_url);
+async function fetchDirectoryContents(url) {
+    const response = await $.ajax({ url: url, method: 'GET' });
+    let directoryStructure = {};
 
-    let response;
-    if (cachedResponse) {
-        response = await cachedResponse.json();
-    } else {
-        response = await fetchAndCacheResponse(cache, github_url);
-    }
-
-    return await buildDirectoryStructure(response);
-}
-
-async function getCachedResponse(cache, url) {
-    const lastFetchResponse = await cache.match(url + '-time');
-    if (lastFetchResponse) {
-        const lastFetch = await lastFetchResponse.text();
-        if (Date.now() - lastFetch > 1800000) {
-            console.log(`Cached response for URL: ${url} is older than 30 minutes. Deleting from cache.`);
-            await cache.delete(url);
-            await cache.delete(url + '-time');
+    for (let item of response) {
+        if (item.type === 'file') {
+            directoryStructure[item.name] = 'file';
+        } else if (item.type === 'dir') {
+            directoryStructure[item.name] = await fetchDirectoryContents(item.url);
         }
     }
-    return await cache.match(url);
+
+    return directoryStructure;
 }
 
-async function fetchAndCacheResponse(cache, url) {
-    const response = await $.ajax({ url: url, method: 'GET' });
-    await cache.put(url, new Response(JSON.stringify(response)));
-    await cache.put(url + '-time', new Response(Date.now().toString()));
-    return response;
+async function getCachedStructure(cache, key) {
+    const cachedResponse = await cache.match(key);
+    return cachedResponse ? await cachedResponse.json() : null;
+}
+
+async function cacheStructure(cache, key, structure) {
+    await cache.put(key, new Response(JSON.stringify(structure)));
 }
 
 async function fetchAndDisplayMarkdown(url) {
