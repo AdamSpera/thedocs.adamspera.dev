@@ -67,6 +67,11 @@
 
 /* FILE EXPLORER */
 
+.no-right-padding-margin {
+  padding-right: 0 !important;
+  margin-right: 0 !important;
+}
+
 .tree {
   letter-spacing: 0.55px;
   margin-top: 6px;
