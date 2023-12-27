@@ -46,7 +46,13 @@ async function fetchAndDisplayDirectoryContents() {
         $('li').eq(2).click();
     } catch (error) {
         console.error(error);
-        alert('Failed to fetch repository structure');
+        $('section-fileexplorer').html(`
+            <div class="container my-6">
+                <h1 style="margin-bottom: 1rem;">File structure not found.</h1>
+                <p>An issue was encountered getting the file structure.</p>
+                <p>To fix this issue, wait an hour, then try again!</p>
+            </div>
+        `);
     }
 }
 
