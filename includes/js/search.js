@@ -23,21 +23,6 @@ $(document).ready(function () {
   $("#searchInput").on('input', async function () {
     var query = $(this).val();
 
-    // Show debug modal
-    if (query === "debug") {
-      $('#searchModal').modal('hide');
-      $('#debugModal').modal('show');
-      $('#debugBody').html(`
-      <div class="container">
-        <button id="clear-cache" class="btn btn-outline-primary my-2 my-lg-0 top-bar-button">Clear Cache</button>
-        <h4>Fetch Directory Contents</h4>
-        <p>${JSON.stringify(await fetchDirectoryContents(base_url))}</p>
-      </div>
-      <script>setupEventHandlers()</script>
-      `)
-      return;
-    }
-
     // Clear the search results
     $("#searchResults").empty();
 
