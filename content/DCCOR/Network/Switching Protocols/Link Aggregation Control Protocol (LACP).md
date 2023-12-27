@@ -27,9 +27,9 @@ LACP is defined by the IEEE in the **802.3ad & 802.1AX** standards.
 
 ### Load Balancing
 
-LACP load balancing uses a hash that returns a number typically between 0 and 7. **The hash is based on the source and destination MAC address, IP address, and TCP/UDP port numbers**. The hash is then used to determine which link in the bundle the packet will be sent out of.
+LACP load balancing employs a hash function that usually yields a number in the range of 0 to 7. This hash is derived from the source and destination MAC addresses, IP addresses, and TCP/UDP port numbers. The hash value is subsequently used to select the specific link in the bundle through which the packet will be transmitted.
 
-Due to the law of averages, it is always advised to use a number of links that is a power of 2 (2, 4, 8, 16, etc.) to ensure that the load balancing is as even as possible.
+Given the principle of averages, it's recommended to utilize a quantity of links that's a power of 2 (like 2, 4, 8, 16, and so on) to guarantee the most uniform load balancing possible.
 
 <main>![LACP Hash Assignment](../../../../media/lacp_hash_assignment_1.png)</main>
 <main>![LACP Hash Assignment 2](../../../../media/lacp_hash_assignment_2.png)</main>

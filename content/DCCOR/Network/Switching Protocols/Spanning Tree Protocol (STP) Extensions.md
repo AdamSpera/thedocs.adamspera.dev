@@ -19,8 +19,6 @@
 
 ## Overview
 
-Cisco has added extensions to STP that enhance loop prevention, protect against user configuration errors, and provide better control over the protocol parameters.
-
 Available STP extensions are:
 
 - STP Edge Ports (previously known as PortFast)
@@ -66,7 +64,7 @@ All these extensions can be used with both Rapid PVST+ and MST.
 
 **UniDirectional Link Detection (UDLD)**
 
-- Periodically transmits UDLD packets on an interface with enabled UDLD. If the packets are not echoed back within a specific time frame, the link is flagged as unidirectional and the interface is error-disabled.
+- Periodically sends out UDLD packets via an interface where UDLD is activated. If these packets aren't returned within a designated period, the link is identified as unidirectional and the interface is transitioned into an error-disabled state.
 - Disabled by default.
 
 ## STP Edge Port
@@ -175,6 +173,7 @@ UniDirectional Link Detection (UDLD) is a Layer 2 protocol exclusive to Cisco. I
 By default, the UDLD feature is disabled.
 
 Two types of UDLD modes:
+
 - **Informational**: simply logs and alerts issues.
 - **Aggressive**: error-disables the interface.
 
