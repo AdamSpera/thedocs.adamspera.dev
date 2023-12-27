@@ -203,7 +203,7 @@
 #content h2 {
   font-size: 2rem;
   font-weight: 700;
-  margin-top: 20px;
+  margin-top: 24px;
   margin-bottom: 20px;
 }
 
@@ -260,27 +260,23 @@
   background-color: rgb(218, 236, 244);
   border-radius: 10px;
   padding: 20px;
-}
-
-/* Code section label */
-#content pre span {
-  color: rgb(255, 0, 0);
-  font-weight: 700;
-}
-
-/* Command text */
-#content pre code {
   color: black;
   font-weight: 600;
 }
 
-/* (Config) text */
-#content pre code span {
-  color: grey;
+/* Code section label */
+#content pre span {
+  color: rgb(25, 0, 255);
   font-size: 16px;
+  font-weight: 700;
 }
 
 /* Optional command syntax */
-#content pre code i {
+#content pre i {
   color: grey;
+}
+
+#content pre hr {
+  padding-bottom: none;
+  margin-bottom: none;
 }
