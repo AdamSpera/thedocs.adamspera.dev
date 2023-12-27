@@ -87,7 +87,7 @@ Spanning-tree edge ports are typically deployed on Layer 2 access ports that are
 
 ## BPDU Guard
 
-BPDU Guard protects the integrity of ports that are configured as STP edge ports. If any BPDU is received on an STP edge port, that port is put into an error-disabled state. The port is shut down and must be manually re-enabled or automatically recovered through the error-disabled timeout function.
+BPDU Guard safeguards the stability of ports set up as STP edge ports. When a BPDU is detected on an STP edge port, the port transitions into an error-disabled state. This results in the port being deactivated and it requires manual reactivation or automatic recovery via the error-disabled timeout feature.
 
 Global BPDU Guard is disabled by default.
 
@@ -125,7 +125,7 @@ Global BPDU Filter is disabled by default.
 
 ## Root Guard
 
-When you enable Root Guard on a port, Root Guard does not allow that port to become a root port. If a root guard-enabled port receives a BPDU that would make this port a root port, then that port will be moved to a root-inconsistent state and will not forward traffic.
+Activating Root Guard on a port prevents that port from becoming a root port. If a port with Root Guard enabled receives a BPDU that would promote it to a root port, the port transitions into a root-inconsistent state and ceases to forward traffic.
 
 ### Configuration
 
@@ -137,7 +137,7 @@ When you enable Root Guard on a port, Root Guard does not allow that port to bec
 
 ## Loop Guard
 
-Loop Guard detects if an active port is no longer receiving BPDUs and moves that port into the STP loop-inconsistent blocking state. When the port starts receiving BPDUs again, indicating that the unidirectional link failure is no longer present, loop guard removes the blocking state on the port.
+Loop Guard monitors for situations where an active port stops receiving BPDUs, and in response, transitions that port into the STP loop-inconsistent blocking state. If the port resumes receiving BPDUs, suggesting the unidirectional link failure has been resolved, Loop Guard lifts the blocking state from the port.
 
 Loop Guard is disabled by default.
 
@@ -153,7 +153,7 @@ Loop Guard is disabled by default.
 
 ## Bridge Assurance
 
-The Bridge Assurance feature, applicable with Rapid PVST+ and MST, is an extension of the idea that is used by loop guard. When bridge assurance is activated on an operational port, this port always sends BPDUs, regardless of the port role. BPDUs essentially become a hello mechanism between pairs of interconnected switches. A port that is configured with bridge assurance is required to receive BPDUs. If a port does not receive BPDUs, it goes into the blocking state. Thus, both ends of the link must have bridge assurance enabled.
+The Bridge Assurance functionality, which is compatible with Rapid PVST+ and MST, expands upon the concept utilized by loop guard. When Bridge Assurance is enabled on a functioning port, that port continuously sends BPDUs, irrespective of the port's role. BPDUs essentially serve as a greeting protocol between pairs of linked switches. A port set up with Bridge Assurance is expected to receive BPDUs. If a port fails to receive BPDUs, it transitions into the blocking state. Therefore, Bridge Assurance must be activated on both ends of the link.
 
 **Bridge Assurance is enabled only on spanning tree network ports that are point-to-point links.**
 
@@ -170,7 +170,7 @@ Bridge Assurance is enabled globally by default.
 
 ## UniDirectional Link Detection (UDLD)
 
-UniDirectional Link Detection (UDLD) is a Cisco proprietary, Layer 2 protocol that works with Layer 1 mechanisms to determine the physical status of a link. The switch periodically transmits UDLD packets on an interface with enabled UDLD. If the packets are not echoed back within a specific time frame, the link is flagged as unidirectional and the interface is error-disabled. Devices on both ends of the link must support UDLD for the protocol to successfully identify and disable unidirectional links.
+UniDirectional Link Detection (UDLD) is a Layer 2 protocol exclusive to Cisco. It collaborates with Layer 1 mechanisms to ascertain the physical status of a link. With UDLD enabled, the switch periodically sends out UDLD packets via an interface. If these packets aren't returned within a set time frame, the link is marked as unidirectional and the interface is put into an error-disabled state. For UDLD to effectively detect and disable unidirectional links, devices at both ends of the link must support the protocol.
 
 By default, the UDLD feature is disabled.
 
