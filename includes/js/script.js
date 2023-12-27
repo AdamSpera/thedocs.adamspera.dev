@@ -20,6 +20,11 @@ function setupEventHandlers() {
         $('#section-documentviewer').empty();
         $('#section-fileexplorer').show();
     });
+    $('#clear-cache').click(async () => {
+        const cache = await caches.open('docs-cache');
+        await cache.delete('structure');
+        location.reload();
+    });
 }
 
 // This function fetches and displays the directory contents
@@ -81,9 +86,21 @@ async function cacheStructure(cache, key, data) {
 
 // This function fetches and displays the markdown
 async function fetchAndDisplayMarkdown(url) {
-    $.get(`content/${url}`, (data) => {
-        const converter = new showdown.Converter();
-        const html = converter.makeHtml(data);
-        $('#section-documentviewer').html(`<div class="container" id="content">${html}</div>`);
-    });
+    $.get(`content/${url}`)
+        .done((data) => {
+            const converter = new showdown.Converter();
+            const html = converter.makeHtml(data);
+            $('#section-documentviewer').html(`<div class="container" id="content">${html}</div>`);
+        })
+        .fail(() => {
+            $('#section-documentviewer').html(`
+                <div class="container" id="content">
+                    <h2>File not found.</h2>
+                    <p>The file you are trying to access has been deleted or moved since your last cache.</p>
+                    <p>To fix this issue, you can wait 24 hours for the cache to auto reset, or press the button below to clear it now!</p>
+                    <button id="clear-cache" class="btn btn-outline-primary my-2 my-lg-0 top-bar-button">Clear Cache</button>
+                </div>
+                <script>setupEventHandlers()</script>`
+            );
+        });
 }
