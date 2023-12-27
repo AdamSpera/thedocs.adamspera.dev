@@ -170,7 +170,7 @@ Bridge Assurance is enabled globally by default.
 
 ## UniDirectional Link Detection (UDLD)
 
-UniDirectional Link Detection (UDLD) is a Layer 2 protocol that works with Layer 1 mechanisms to determine the physical status of a link. The switch periodically transmits UDLD packets on an interface with enabled UDLD. If the packets are not echoed back within a specific time frame, the link is flagged as unidirectional and the interface is error-disabled. Devices on both ends of the link must support UDLD for the protocol to successfully identify and disable unidirectional links.
+UniDirectional Link Detection (UDLD) is a Cisco proprietary, Layer 2 protocol that works with Layer 1 mechanisms to determine the physical status of a link. The switch periodically transmits UDLD packets on an interface with enabled UDLD. If the packets are not echoed back within a specific time frame, the link is flagged as unidirectional and the interface is error-disabled. Devices on both ends of the link must support UDLD for the protocol to successfully identify and disable unidirectional links.
 
 By default, the UDLD feature is disabled.
 
