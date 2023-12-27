@@ -174,6 +174,10 @@ UniDirectional Link Detection (UDLD) is a Layer 2 protocol that works with Layer
 
 By default, the UDLD feature is disabled.
 
+Two types of UDLD modes:
+- **Informational**: simply logs and alerts issues.
+- **Aggressive**: error-disables the interface.
+
 ### Configuration
 
 <pre>
