@@ -60,6 +60,8 @@ Benefits of vPC includes:
       - Monitors the vPC status on the peer
       - Aligns ARP tables (applicable for Layer 3 vPC peers)
 
+NOTE: Traffic sent over the vPC Peer Link is tagged with a special header, telling its peer NOT to forward it out of any of its vPC ports.
+
 ## Configuring vPC
 
 Configuring a vPC setup includes the following steps:
@@ -139,3 +141,16 @@ vpc domain 10
 The primary benefit of the vPC peer-switch feature is its enhancement of convergence time during vPC primary peer device failure/recovery. These up/down events don't trigger any STP recalculations, thus reducing traffic disruption to sub second values.
 
 This feature also streamlines the STP configuration by removing the necessity to pin the STP root to the vPC primary switch.
+
+## vPC Inconstancy Types
+
+**Type 1**
+- STP Type
+- Access/Trunk
+- Native VLAN
+- Speed
+
+**Type 2**
+- SVI Up/Down
+- QoS
+- VLAN Allowed
