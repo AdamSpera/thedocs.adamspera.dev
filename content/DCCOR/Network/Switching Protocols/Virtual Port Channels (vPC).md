@@ -77,22 +77,89 @@ Configuring a vPC setup includes the following steps:
 4. Establish the vPC peer link.
 5. Transition the PortChannel to vPC.
 
+<main>![vPC CML Topology](../../../../media/vpc_cml_topo.png)</main>
+
 <pre>
-feature vpc
+<span>Nexus9K #1</span>
+<hr>feature vpc
 !
-vpc domain 10
-  peer-keepalive destination 192.168.1.10 source 192.168.1.20 vrf vPC_VRF
+vpc domain 100
+  peer-keepalive destination 1.1.1.2 source 1.1.1.1 vrf Management
+!
+interface Mgmt0
+  description vPC Keepalive
+  ip address 1.1.1.1/24
+!
+interface Ethernet1/1
+  description vPC Peer-Link Member
+  switchport mode trunk
+  channel-group 1 mode on
+!
+interface Ethernet1/2
+  description vPC Peer-Link Member
+  switchport mode trunk
+  channel-group 1 mode on
+!
+interface Ethernet1/3
+  description vPC Channel Member
+  switchport mode trunk
+  channel-group 10 mode active
 !
 interface port-channel 1
+  description Peer-Link Interfaces
   vpc peer-link
 !
-interface port-channel 2
-  vpc 11
+interface port-channel 10
+  description vPC Channel
+  vpc 10
+</pre>
+
+<pre>
+<span>Nexus9K #2</span>
+<hr>feature vpc
+!
+vpc domain 100
+  peer-keepalive destination 1.1.1.1 source 1.1.1.2 vrf Management
+!
+interface Mgmt0
+  description vPC Keepalive
+  ip address 1.1.1.2/24
+!
+interface Ethernet1/1
+  description vPC Peer-Link Member
+  switchport mode trunk
+  channel-group 1 mode on
+!
+interface Ethernet1/2
+  description vPC Peer-Link Member
+  switchport mode trunk
+  channel-group 1 mode on
+!
+interface Ethernet1/3
+  description vPC Channel Member
+  switchport mode trunk
+  channel-group 10 mode active
+!
+interface port-channel 1
+  description Peer-Link Interfaces
+  vpc peer-link
+!
+interface port-channel 10
+  description vPC Channel
+  vpc 10
 </pre>
 
 The vPC domain ID is a numerical value between 1 and 1000 that identifies the vPC switch duo. (The code snippet uses 10)
 
 Port channel 2, which connects to the downstream device, is transitioned to vPC mode. This port channel must be linked to the port channel on the other vPC switch by assigning the same vPC number to its port channel interface. The vPC port number, unique within the vPC domain, must be the same on both peer switches.
+
+<pre>
+<span>Change device roles.</span>
+<hr>vpc domain 100
+  role priority <i>1000</i>
+</pre>
+
+NOTE: Lower priority will be elected as primary.
 
 ## vPC Guidelines
 
@@ -141,6 +208,28 @@ vpc domain 10
 The primary benefit of the vPC peer-switch feature is its enhancement of convergence time during vPC primary peer device failure/recovery. These up/down events don't trigger any STP recalculations, thus reducing traffic disruption to sub second values.
 
 This feature also streamlines the STP configuration by removing the necessity to pin the STP root to the vPC primary switch.
+
+### vPC Auto-Recovery
+
+The vPC Auto-Recovery feature enables a vPC switch to automatically recover from a dual-active scenario, without requiring any user intervention. This feature is enabled by default.
+
+#### Configuration
+
+<pre>
+vpc domain 10
+  auto-recovery reload-delay 60
+</pre>
+
+### vPC ARP Sync
+
+The vPC ARP Sync feature enables the vPC peer devices to synchronize their ARP tables. This feature is enabled by default.
+
+#### Configuration
+
+<pre>
+vpc domain 10
+  ip arp synchronize
+</pre>
 
 ## vPC Inconstancy Types
 
