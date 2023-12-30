@@ -39,6 +39,18 @@ interface vlan 10
 
 ## VRRP vs HSRP
 
+#### HSRP Timers
+
+- **Hello Timer**: 3 seconds
+- **Hold Timer**: 10 seconds
+
+#### VRRP Timers
+
+- **Hello Timer**: 1 second
+- **Hold Timer**: 3 seconds
+
+### Differences
+
 - **Standardization**: VRRP (Virtual Router Redundancy Protocol) is an open standard protocol, defined by the Internet Engineering Task Force (IETF) in RFC 3768. On the other hand, HSRP (Hot Standby Router Protocol) is a Cisco proprietary protocol.
 
 - **Virtual Router Master/Backup vs Active/Standby**: In VRRP, the primary router is known as the Master, and the secondary router is referred to as the Backup. In HSRP, the primary router is known as the Active router, and the secondary router is referred to as the Standby router.
