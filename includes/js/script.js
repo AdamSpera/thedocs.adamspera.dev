@@ -1,8 +1,7 @@
 // Constants for the user, repo, and start folder
 const user = "adamspera";
 const repo = "thedocs.adamspera.dev";
-const start_folder = "content";
-const base_url = `https://api.github.com/repos/${user}/${repo}/contents/${start_folder}`;
+const base_url = `https://api.github.com/repos/${user}/${repo}/git/trees/main?recursive=1`;
 
 // Initialize the app when the document is ready
 $(document).ready(initializeApp);
@@ -57,18 +56,36 @@ async function fetchAndDisplayDirectoryContents() {
 }
 
 // This function fetches the directory contents from the GitHub API
-async function fetchDirectoryContents(url) {
-    const response = await $.ajax({ url: url, method: 'GET' });
+async function fetchDirectoryContents() {
+    const response = await fetch(base_url);
+    const data = await response.json();
+
     let directoryStructure = {};
 
-    for (let item of response) {
-        if (item.type === 'file') {
-            directoryStructure[item.name] = 'file';
-        } else if (item.type === 'dir') {
-            directoryStructure[item.name] = await fetchDirectoryContents(item.url);
+    // Filter out items that are not in the 'content' directory or are not files
+    const contentItems = data.tree.filter(item => item.type === 'blob' && item.path.startsWith('content/'));
+
+    for (let item of contentItems) {
+        let pathParts = item.path.split('/');
+        let currentLevel = directoryStructure;
+
+        // Skip the first part of the path ('content')
+        for (let i = 1; i < pathParts.length; i++) {
+            // If this is the last part of the path, it's a file
+            if (i === pathParts.length - 1) {
+                currentLevel[pathParts[i]] = 'file';
+            } else {
+                // If this part of the path does not exist yet, create it
+                if (!currentLevel[pathParts[i]]) {
+                    currentLevel[pathParts[i]] = {};
+                }
+                // Move to the next level of the directory structure
+                currentLevel = currentLevel[pathParts[i]];
+            }
         }
     }
 
+    // Return the directory structure
     return directoryStructure;
 }
 
