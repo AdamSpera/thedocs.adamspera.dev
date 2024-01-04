@@ -35,7 +35,7 @@ router bgp 65000
   router-id 10.10.10.10
   address-family ipv4 unicast
 
-  neighbor 209.165.201.2 remote-as 65001
+  neighbor 1.1.1.2 remote-as 65001
     description "Connection to ISP1"
     address-family ipv4 unicast
 
