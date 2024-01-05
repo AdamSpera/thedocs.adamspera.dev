@@ -5,6 +5,8 @@
 
 ![Keyword](https://img.shields.io/badge/BGP-darkgreen)
 ![Keyword](https://img.shields.io/badge/Border%20Gateway%20Protocol-darkgreen)
+![Keyword](https://img.shields.io/badge/MP-BGP-darkgreen)
+![Keyword](https://img.shields.io/badge/Multiprotocol%20BGP-darkgreen)
 
 <hr>
 
@@ -24,6 +26,42 @@ Upon establishing a TCP connection between peers, each BGP peer initially shares
 - After this initial exchange, BGP peers only send incremental updates when there's a change in the network topology or a routing policy change.
 
 - During periods of inactivity between these updates, peers exchange special messages known as keep-alives.
+
+## BGP Path Selection
+
+REQUIRED: Next hop MUST be reachable.
+
+1. **Highest WEIGHT**
+
+    Weight local to the router. Not advertised to other routers.
+
+1. **Highest LOCAL PREFERENCE**
+
+    Shared weight between routers. Is advertised to other routers.
+
+3. **LOCALLY ORIGINATED**
+
+    Will prefer an identical route form itself over other advertized routes.
+
+4. **Lowest AS_PATH**
+
+    Will choose the fasted (shortest) path to the destination.
+
+5. **Lowest ORIGIN**
+
+6. **Lowest MULTI-EXIT DISCRIMINATOR**
+
+7. **eBGP ROUTE > iBGP ROUTE**
+
+8. **NEXT HOP IGP METRIC**
+
+9. **LAST CHOSEN**
+
+10. (Optional) **Lowest PEER ROUTER-ID**
+
+11. **Lowest CLUSTER LENGTH**
+
+12. **Lowest PEER IP ADDRESS**
 
 ### Configuration
 
@@ -50,24 +88,6 @@ router bgp 65000
 
 In this figure, the Enterprise configured BGP on the two core routers, and the ISP configured BGP on their end accordingly.
 
-## BGP Path Selection
-
-### Step 1: Comparing Pairs of Paths
-
-1. Select a valid path for comparison. (Paths with unreachable next-hops are invalid.)
-2. Choose the path with the highest weight.
-3. Choose the path with the highest local preference.
-4. Prefer locally originated paths.
-5. Choose the path with the shorter AS-path.
-6. Choose the path with the lower origin. (IGP is lower than EGP.)
-7. Choose the path with the lower multi-exit discriminator (MED).
-
-### Step 2: Determining the Order of Comparisons
-
-1. Paths are divided into groups. MED is compared within each group using the same rules as in step 1. Typically, one group is chosen for each neighbor autonomous system. If 'bgp bestpath med always' is configured, one group containing all paths is chosen.
-2. The best path in each group is determined by comparing all paths in the group and keeping the best one so far. If a new path is better, it becomes the new temporary best path.
-3. A set of paths containing the best path from each group is formed. The overall best path is selected from this set by comparing them as in step 2.
-
 ## MP-BGP
 
 Multiprotocol BGP (MP-BGP) is an extension to BGP that enables it to carry routing information for multiple network layer protocols (e.g., IPv4, IPv6, and VPNs) in a single BGP session.
@@ -76,8 +96,8 @@ Multiprotocol BGP (MP-BGP) is an extension to BGP that enables it to carry routi
 interface ethernet 1/1
   ipv6 address 2001:0DB8::1 
 !
-router bgp 65536
-  neighbor 192.168.1.2 remote-as 35537
+router bgp 65000
+  neighbor 192.168.1.2 remote-as 65001
     address-family ipv4 multicast
     address-family ipv6 multicast 
 </pre>
