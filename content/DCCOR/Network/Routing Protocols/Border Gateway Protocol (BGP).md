@@ -29,6 +29,8 @@ Upon establishing a TCP connection between peers, each BGP peer initially shares
 
 NOTE: Cisco Nexus switches support BGPv4 only.
 
+<main>![BGP Basic Config](../../../../media/bgp_basic_config.png)</main>
+
 <pre>
 feature bgp
 router bgp 65000
@@ -45,8 +47,6 @@ router bgp 65000
     address-family ipv4 unicast
     next-hop-self
 </pre>
-
-<main>![BGP Basic Config](../../../../media/bgp_basic_config.png)</main>
 
 In this figure, the Enterprise configured BGP on the two core routers, and the ISP configured BGP on their end accordingly.
 
