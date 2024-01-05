@@ -148,36 +148,82 @@ Prune messages can then be sent to the RP to prune the RPT.
 
 Note that bsr-candidate and rp-candidate are commands for BSR only. For Auto-RP, use auto-rp rp-candidate, and mapping-agent.
 
+<main>![Multicast Config](../../../../media/multicast_config.png)</main>
+
 <pre>
-feature pim|pim6
+<span>Setup PIM on all routers</span>
+<hr>feature pim
 !
-{ ip | ipv6 } pim rp-address 1.1.1.1
-!
-interface Eth1/1-2
+interface Eth1/1
   ip pim sparse-mode
+  no shutdown
 !
-interface Loopback
-  description Universal Commands
+interface Eth1/2
   ip pim sparse-mode
-  ip pim hello-authentication ah-md5 1234
-  ip pim dr-priority 10
+  no shutdown
+<hr>
+show ip pim neighbor
+</pre>
+
+<pre>
+<span>Setup Static-RP on Router-1</span>
+<hr>ip pim rp 10.10.10.2 group-list 239.0.200.0/24
+<hr>
+show ip pim rp
+</pre>
+
+<pre>
+<span>Setup BSR on Router-1</span>
+<hr>ip pim bsr bsr-candidate Eth1/1
 !
-interface Loopback
-  description Auto-RP Commands
-  ip pim auto-rp rp-candidate
-  ip pim auto-rp mapping-agent
-  ip pim auto-rp listen forward
+ip pim bsr listen
+<hr>
+show ip pim rp
+</pre>
+
+<pre>
+<span>Setup Auto-RP on Router-2</span>
+<hr>ip pim auto-rp rp-candidate Eth1/1 group-list 239.0.0.0/24 bidir
+ip pim auto-rp mapping-agent Eth1/1
+ip pim auto-rp forward listen
+<hr>
+show ip pim rp
+</pre>
+
+<pre>
+<span>Setup Anycast-RP on Router-3</span>
+<hr>interface Loopback0
+  ip address 10.1.1.1/32
+  ip router ospf 1 area 0
+  no shutdown
 !
-interface Loopback
-  description BSR Commands
-  ip pim rp-candidate
-  ip pim bsr-candidate
-  ip pim bsr listen forward
+interface Eth1/1
+  ip address 10.10.10.6/30
+  ip router ospf 1 area 0
+  no shutdown
+!
+interface Eth1/2
+  ip address 10.10.10.9/30
+  ip router ospf 1 area 0
+  no shutdown
+!
+ip pim anycast-rp 10.1.1.1 10.10.10.6
+ip pim anycast-rp 10.1.1.1 10.10.10.9
+<hr>
+<span>Setup Mapping and Forwarding on Router-2</span>
+<hr>ip pim auto-rp mapping-agent Eth1/1
+ip pim auto-rp forward listen
+<hr>
+show ip pim rp
+</pre>
+
+<pre>
+<span>Setup SSM on Router-1</span>
+<hr>ip ssm range 239.0.100.0/24
+<hr>
+show ip pim group-range
 </pre>
 
 <pre>
 show ip mroute
-show ip pim neighbor
-show ip pim interface
-pim restart
 </pre>

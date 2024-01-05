@@ -1,4 +1,4 @@
-# Internet Group Management Protocol (IGMP) & Multicast Listener Discovery (MLD)
+# Internet Group Management Protocol (IGMP) & MLD
 
 ![Exam](https://img.shields.io/badge/DCCOR-8A2BE2)
 ![Last Updated](https://img.shields.io/badge/Last%20Updated-2024--01--05-blue)
