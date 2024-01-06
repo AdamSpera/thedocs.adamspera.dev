@@ -113,21 +113,19 @@ async function fetchAndDisplayMarkdown(url) {
         .done((data) => {
             const converter = new showdown.Converter();
             const html = converter.makeHtml(data);
-            $('#section-documentviewer').html(`<div class="container" id="content">${html}</div>`);
-        })
-        .fail(() => {
-            const converter = new showdown.Converter();
-            const html = converter.makeHtml(data);
-            if ($(html).find('<script>')) {
+            if ($(html).has('html').length > 0) {
                 $('#section-documentviewer').html(`
-                <div class="container" id="content">
-                    <h2>File not found.</h2>
-                    <p>The file you are trying to access has been deleted or moved since your last cache.</p>
-                    <p>To fix this issue, you can wait 24 hours for the cache to auto reset, or press the button below to clear it now!</p>
-                    <button id="clear-cache" class="btn btn-outline-primary my-2 my-lg-0 top-bar-button">Clear Cache</button>
-                </div>
-                <script>setupEventHandlers()</script>`
-            );
+                    <div class="container" id="content">
+                        <h2>File not found.</h2>
+                        <p>The file you are trying to access has been deleted or moved since your last cache.</p>
+                        <p>To fix this issue, you can wait 24 hours for the cache to auto reset, or press the button below to clear it now!</p>
+                        <button id="clear-cache" class="btn btn-outline-primary my-2 my-lg-0 top-bar-button">Clear Cache</button>
+                    </div>
+                    <script>setupEventHandlers()</script>`
+                );
+            } else {
+                $('#section-documentviewer').html(`<div class="container" id="content">${html}</div>`);
             }
-        });
+
+        })
 }
