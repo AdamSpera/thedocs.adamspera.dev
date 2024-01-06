@@ -197,16 +197,6 @@ show ip pim rp
   ip router ospf 1 area 0
   no shutdown
 !
-interface Eth1/1
-  ip address 10.10.10.6/30
-  ip router ospf 1 area 0
-  no shutdown
-!
-interface Eth1/2
-  ip address 10.10.10.9/30
-  ip router ospf 1 area 0
-  no shutdown
-!
 ip pim anycast-rp 10.1.1.1 10.10.10.6
 ip pim anycast-rp 10.1.1.1 10.10.10.9
 <hr>
@@ -214,7 +204,7 @@ ip pim anycast-rp 10.1.1.1 10.10.10.9
 <hr>ip pim auto-rp mapping-agent Eth1/1
 ip pim auto-rp forward listen
 <hr>
-show ip pim rp
+Router-3: show ip pim rp
 </pre>
 
 <pre>
