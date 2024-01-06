@@ -113,7 +113,7 @@ async function fetchAndDisplayMarkdown(url) {
         .done((data) => {
             const converter = new showdown.Converter();
             const html = converter.makeHtml(data);
-            if ($(html).filter('html').length > 0) {
+            if (data.includes("DOCTYPE")) {
                 $('#section-documentviewer').html(`
                     <div class="container" id="content">
                         <h2>File not found.</h2>
