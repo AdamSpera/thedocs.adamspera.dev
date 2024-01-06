@@ -116,7 +116,10 @@ async function fetchAndDisplayMarkdown(url) {
             $('#section-documentviewer').html(`<div class="container" id="content">${html}</div>`);
         })
         .fail(() => {
-            $('#section-documentviewer').html(`
+            const converter = new showdown.Converter();
+            const html = converter.makeHtml(data);
+            if ($(html).find('<script>')) {
+                $('#section-documentviewer').html(`
                 <div class="container" id="content">
                     <h2>File not found.</h2>
                     <p>The file you are trying to access has been deleted or moved since your last cache.</p>
@@ -125,5 +128,6 @@ async function fetchAndDisplayMarkdown(url) {
                 </div>
                 <script>setupEventHandlers()</script>`
             );
+            }
         });
 }
