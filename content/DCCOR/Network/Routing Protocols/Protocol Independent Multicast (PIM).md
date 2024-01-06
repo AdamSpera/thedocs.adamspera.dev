@@ -29,19 +29,6 @@
 
 ## Overview
 
-Layer 2 Protocols
-
-- IGMP (Internet Group Management Protocol)
-  - IPv4
-  - Snooping
-- MLD (Multicast Listener Discovery)
-  - IPv6
-
-Layer 3 Protocols
-
-- PIM (Protocol Independent Multicast)
-  - Creates the multicast tree.W
-
 Connects sources to destinations that want to receive the multicast traffic.
 
 The network needs to be converged at layer 3 before PIM usage.
@@ -53,7 +40,7 @@ Two types of routes:
 - (*, G) - Any source to a group
 - (S, G) - Specific source to a group
 
-### PIM Sparse Mode
+## PIM Sparse Mode
 
 Problem is that teh receivers don't know where the source of the traffic they want to receive is, and teh source of the traffic does not know who wants it.
 
@@ -97,56 +84,89 @@ Because each routers initially builds its **RPT (Rendezvous Point Tree)** it can
 
 Prune messages can then be sent to the RP to prune the RPT.
 
-### PIM Roles
+## PIM Roles
 
-#### General Roles
+### Static
 
-- DR (Designated Router)
+You can statically configure an RP for a multicast group range.
 
-    - Used by IGMP and MLD.
+Every router must have a Static RP configured.
 
-    - Used to send out the *JOIN* messages.
+Static RP's are used to do the following:
 
-    - Is determined by the highest IP address upstream.
+- Configure routers with the Anycast RP address.
+- Configure a RP address manually.
 
-- DF (Designated Forwarder)
+<pre>
+ip pim rp 10.10.10.6
+ip pim rp 10.10.10.6 group-list 239.0.200.0/24
+</pre>
 
-    - Used by IGMP and MLD.
+The first command above tells the router that its Statically configured RP is 10.10.10.6.
 
-    - Used to send out the multicast traffic.
+The second command above tells the router that its Statically configured RP is 10.10.10.6 but also specifies the group range that the RP is responsible for.
 
-#### RP Discovery
+### BSR
 
-- Static
+The bootstrap router ensures that every router in the PIM domain has the same RP cache as the BSR.
 
-    - Manually configured RP address on each router.
+A BSR is configured to help select a RP from a set of BSR candidate RPs.
 
-- Auto-RP
+The function of the BSR is to broadcast the RP set to all routers in
+the domain.
 
-    - Made by Cisco
+<pre>
+ip pim bsr bsr-candidate Eth1/1
+ip pim bsr listen
+</pre>
 
-    - Sparse-Dense Mode 
+The first command above tells the router that it is a BSR candidate, and that it will use the IP address of Eth1/1 as its BSR address.
 
-    - Routers advertize that they can be a RP on 224.0.1.39.
+The second command above tells the router to listen for BSR messages, and use the info received form a BSR Candidate as its RP information.
 
-    - Mapping Agent then sends that info to the network via 224.0.1.40.
+### Auto-RP
 
-- BSR (Bootstrap Router)
+Cisco protocol that was used before to the Internet standard BSR.
 
-    - Open standard
+Auto-RP Candidates send their supported group range in RP-Announcement messages to the multicast 224.0.1.39 group.
 
-    - PIMv2
-        - PIM messaging sent to 224.0.0.13.
+Auto-RP Mapping Agents listen for the RP-Announcement messages from RP-Candidates and creates and builds the Group-to-RP mapping table. The mapping agent then multicasts the Group-to-RP mapping table through RP-Discovery messages, over the RP-Discovery multicast 224.0.1.40 group.
 
-- Anycast RP
+<pre>
+ip pim auto-rp rp-candidate e2/1 group-list 239.0.0.0/24 bidir
+ip pim auto-rp mapping-agent e2/1
+ip pim auto-rp forward listen
+</pre>
 
-    - Uses same IP on two different routers.
+The first command above tells the router that it is an Auto-RP candidate, and that it will use the IP address of Eth1/1 as its Auto-RP address. It also specifies the group range that the RP is responsible for.
 
-    - Uses **MSDP (Multicast Source Discovery Protocol)** to sync the RP's, and avoid a split brain situation.
+The second command above tells the router that it is an Auto-RP mapping agent, and that it will use the IP address of Eth1/1 as its Auto-RP address for its outgoing Auto-RP Discovery messages.
 
-## Configuration
+The third command above tells the router to listen for Auto-RP Discovery messages, and will remember the info received from a Auto-RP Candidate.
 
-Note that bsr-candidate and rp-candidate are commands for BSR only. For Auto-RP, use auto-rp rp-candidate, and mapping-agent.
+### Anycast RP
+
+This method requires the explicit use of:
+
+- Protocol Independent Multicast (PIM)
+- Multicast Source Discovery Protocol (MSDP)
+
+A single Anycast RP IP address is configured on multiple routers, on their loopback interfaces, which also have PIM enabled. The Anycast RP IP address needs to be advertised into the IGP.
+
+<pre>
+interface Loopback0
+  ip address 10.1.1.1/32
+  ip router ospf 1 area 0
+!
+ip pim anycast-rp 10.1.1.1 10.10.10.6
+ip pim anycast-rp 10.1.1.1 10.10.10.9
+</pre>
+
+The first set of commands above configures the loopback interface with an IP address and makes sure its available in the IGP.
+
+The second set of commands above ensures that the Anycast address is reachable via the interfaces with the specified IP addresses.
+
+## Full Configuration
 
 <main>![Multicast Config](../../../../media/multicast_config.png)</main>
 

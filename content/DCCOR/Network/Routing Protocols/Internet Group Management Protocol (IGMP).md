@@ -1,4 +1,4 @@
-# Internet Group Management Protocol (IGMP) & MLD
+# Internet Group Management Protocol (IGMP)
 
 ![Exam](https://img.shields.io/badge/DCCOR-8A2BE2)
 ![Last Updated](https://img.shields.io/badge/Last%20Updated-2024--01--05-blue)
@@ -59,12 +59,9 @@ feature { pim | pim6 }
 !
 interface Eth1/1
   ip igmp version { 2 | 3 }
-  ip mld version { 2 | 3 }
 </pre>
 
 <pre>
 show ip igmp interface
-show ip mld interface
 show ip igmp snooping groups
-show ipv6 mld snooping statistics interface vlan #
 </pre>
