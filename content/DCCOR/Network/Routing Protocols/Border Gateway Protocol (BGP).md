@@ -5,7 +5,7 @@
 
 ![Keyword](https://img.shields.io/badge/BGP-darkgreen)
 ![Keyword](https://img.shields.io/badge/Border%20Gateway%20Protocol-darkgreen)
-![Keyword](https://img.shields.io/badge/MP-BGP-darkgreen)
+![Keyword](https://img.shields.io/badge/MPBGP-darkgreen)
 ![Keyword](https://img.shields.io/badge/Multiprotocol%20BGP-darkgreen)
 
 <hr>
