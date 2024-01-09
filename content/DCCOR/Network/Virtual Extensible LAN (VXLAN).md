@@ -32,8 +32,6 @@ feature ospf
 router ospf 1
 !
 ip pim rp-address 10.1.1.100
-ip pim anycast-rp 10.1.1.100 10.0.0.1
-ip pim anycast-rp 10.1.1.100 10.0.0.5
 !
 interface loopback0
   ip address 10.1.1.100/32
@@ -42,6 +40,7 @@ interface loopback0
 !
 interface Ethernet1/1
   no switchport
+  mtu 9216
   ip address 10.0.0.1/30
   ip router ospf 1 area 0.0.0.0
   ip pim sparse-mode
@@ -49,6 +48,7 @@ interface Ethernet1/1
 !
 interface Ethernet1/2
   no switchport
+  mtu 9216
   ip address 10.0.0.5/30
   ip router ospf 1 area 0.0.0.0
   ip pim sparse-mode
@@ -67,11 +67,9 @@ ip pim rp-address 10.1.1.100
 interface Ethernet1/1
   switchport access vlan 10
 !
-interface Ethernet1/2
-  switchport access vlan 20
-!
 interface Ethernet1/3
   no switchport
+  mtu 9216
   ip address 10.0.0.2/30
   ip router ospf 1 area 0.0.0.0
   ip pim sparse-mode
@@ -95,11 +93,9 @@ ip pim rp-address 10.1.1.100
 interface Ethernet1/1
   switchport access vlan 10
 !
-interface Ethernet1/2
-  switchport access vlan 20
-!
 interface Ethernet1/3
   no switchport
+  mtu 9216
   ip address 10.0.0.6/30
   ip router ospf 1 area 0.0.0.0
   ip pim sparse-mode
@@ -119,18 +115,13 @@ interface loopback0
 feature vn-segment-vlan-based
 !
 vlan 10
-  vn-segment 160010
-!
-vlan 20
-  vn-segment 160020
+  vn-segment 100000
 !
 interface nve1
   no shutdown
   source-interface loopback0
-  member vni 160010
-    mcast-group 231.1.1.1
-  member vni 160020
-    mcast-group 231.1.1.2
+  member vni 100000
+    mcast-group 239.1.1.1
 </pre>
 
 #### Verification
