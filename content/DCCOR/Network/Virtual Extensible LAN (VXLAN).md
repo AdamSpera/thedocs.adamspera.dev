@@ -14,9 +14,22 @@ Standardized under the IEEE 802.1Q group.
 
 VXLAN supports 16 million segments.
 
+## Terminology
+
+**VXLAN**: Virtual Extensible LAN
+
+**VTEP**: VXLAN Tunnel End Point
+
+**VNI**: Virtual Network Identifier
+
+**NVE**: Network Virtualization Edge
+
+**EVPN**: Ethernet Virtual Private Network
+
+
 ## Configuration
 
-Remember: MTU 9214 is needed for VXLAN.
+Remember: MTU 9216 is needed for VXLAN.
 
 ### Configurations
 
