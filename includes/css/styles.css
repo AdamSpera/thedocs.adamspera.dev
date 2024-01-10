@@ -279,3 +279,8 @@
   padding-bottom: none;
   margin-bottom: none;
 }
+
+#content input[type="checkbox"] {
+  margin-right: 10px;
+  margin-left: 10px;
+}

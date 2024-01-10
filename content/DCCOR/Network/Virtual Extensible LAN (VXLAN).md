@@ -33,6 +33,27 @@ Remember: MTU 9216 is needed for VXLAN.
 
 ### Configurations
 
+**Config Steps Checklist**
+
+<form action="">
+  <input type="checkbox" id="option1" name="option1" value="Option1">
+  <label for="option1">Features</label><br>
+  <input type="checkbox" id="option2" name="option2" value="Option2">
+  <label for="option2">Interfaces IPs</label><br>
+  <input type="checkbox" id="option3" name="option3" value="Option3">
+  <label for="option3">OSPF</label><br>
+  <input type="checkbox" id="option3" name="option3" value="Option3">
+  <label for="option3">PIM</label><br>
+  <input type="checkbox" id="option3" name="option3" value="Option3">
+  <label for="option3">MTU</label><br>
+  <input type="checkbox" id="option3" name="option3" value="Option3">
+  <label for="option3">Switch ports</label><br>
+  <input type="checkbox" id="option3" name="option3" value="Option3">
+  <label for="option3">VXLAN</label><br>
+  <input type="checkbox" id="option3" name="option3" value="Option3">
+  <label for="option3">EVPN</label><br>
+</form>
+
 <main>![VXLAN Basic](../../../../media/vxlan_base.png)</main>
 
 #### Prerequisites
@@ -120,8 +141,6 @@ interface nve1
 
 #### EVPN Configs
 
-##### Setting up BGP
-
 <pre>
 <span>Spine</span>
 <hr>router bgp 65000
@@ -150,29 +169,7 @@ interface nve1
     rd auto
     route-target both auto
 !
-interface nve 1
-  host-reachability protocol bgp
-!
-interface loopback 1
-  no shutdown
-  ip address 1.1.1.1/32
-!
-router bgp 65000
-  address-family ipv4 unicast
-    network 1.1.1.1/32
-  address-family l2vpn evpn
-  neighbor 10.0.0.1
-    remote-as 65000
-    address-family ipv4 unicast
-    address-family l2vpn evpn
-      send-community extended
-</pre>
-
-##### Setting up EVPN
-
-<pre>
-<span>9K-1 & 9K-2</span>
-<hr>fabric forwarding anycast-gateway-mac a.a.a
+fabric forwarding anycast-gateway-mac a.a.a
 !
 vlan 333
   vn-segment 333333
@@ -196,11 +193,24 @@ interface vlan 333
   ip forward
 !
 interface nve 1
+  host-reachability protocol bgp
   member vni 333333 associate-vrf
 !
 route-map PERMIT_ALL permit 10
 !
+interface loopback 1
+  no shutdown
+  ip address 1.1.1.1/32
+!
 router bgp 65000
+  address-family ipv4 unicast
+    network 1.1.1.1/32
+  address-family l2vpn evpn
+  neighbor 10.0.0.1
+    remote-as 65000
+    address-family ipv4 unicast
+    address-family l2vpn evpn
+      send-community extended
   vrf VXVRF
     address-family ipv4 unicast
       redistribute direct route-map PERMIT_ALL
