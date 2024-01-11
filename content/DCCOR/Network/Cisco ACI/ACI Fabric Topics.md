@@ -41,6 +41,8 @@ On the CIsco APIC CLI you can configure the following:
 A fabric node is considered active when the APIC and node can
 exchange heartbeats through the Intra-Fabric Messaging (IFM) process. The APIC also uses the IFM process to push policy to the fabric leaf nodes.
 
+<main>![APIC Discovery](../../../../media/apic_discovery.png)</main>
+
 #### Overall
 
 1. Link Layer Discovery Protocol (LLDP) Neighbor Discovery
