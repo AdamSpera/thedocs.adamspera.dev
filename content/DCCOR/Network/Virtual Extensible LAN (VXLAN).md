@@ -10,9 +10,21 @@
 
 ## Overview
 
-Standardized under the IEEE 802.1Q group.
+VXLAN, or Virtual Extensible LAN, is a network technology that allows us to create a logical network for virtual machines, across different networks. In simpler terms, it extends a LAN (L2) to include machines that are physically on different networks.
 
-VXLAN supports 16 million segments.
+Imagine you have two computers in different cities, but you want them to behave as if they're on the same local network. VXLAN can help you do that. It encapsulates the original data packets, sending them through a 'tunnel' to the destination, where they're de-encapsulated and processed normally. This tunneling process is invisible to the computers, so they behave as if they're on the same network.
+
+The key components of VXLAN are:
+
+- **VXLAN Tunnel End Point (VTEP)**: This is the entity where encapsulation and de-encapsulation of VXLAN packets occur.
+
+- **Virtual Network Identifier (VNI)**: This is used to identify the VXLAN segment. Each segment has a unique VNI.
+
+- **Network Virtualization Edge (NVE)**: This refers to the device doing the encapsulation and de-encapsulation.
+
+- **Ethernet Virtual Private Network (EVPN)**: This is often used with VXLAN for routing and control plane operations.
+
+Remember, VXLAN requires a larger MTU size (9216/9214 bytes) due to the extra VXLAN headers.
 
 ## Terminology
 
@@ -25,7 +37,6 @@ VXLAN supports 16 million segments.
 **NVE**: Network Virtualization Edge
 
 **EVPN**: Ethernet Virtual Private Network
-
 
 ## Configuration
 
