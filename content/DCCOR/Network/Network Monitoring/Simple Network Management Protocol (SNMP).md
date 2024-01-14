@@ -5,6 +5,8 @@
 
 ![Keyword](https://img.shields.io/badge/SNMP-darkgreen)
 ![Keyword](https://img.shields.io/badge/Management%20Information%20Base-darkgreen)
+![Keyword](https://img.shields.io/badge/Community%20String-darkgreen)
+![Keyword](https://img.shields.io/badge/Trap-darkgreen)
 
 <hr>
 
