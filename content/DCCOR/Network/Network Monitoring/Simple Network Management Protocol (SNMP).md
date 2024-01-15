@@ -12,6 +12,69 @@
 
 ## SNMP
 
+### General Logging
+
+**Terminal Logging**
+
+- Default, sends all logs to the console port line con.
+
+**Terminal Logging**
+
+- Displays on Telnet or SSH
+
+**Buffered Logging**
+
+- Uses RAM to store syslog messages
+
+**Syslog Server Logging**
+
+- Sends logs to a syslog server
+
+#### Security Levels
+
+<table>
+    <thead>
+        <tr>
+            <th>Level</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>0 – Emergency</td>
+            <td>System unusable</td>
+        </tr>
+        <tr>
+            <td>1 – Alert</td>
+            <td>Immediate action needed</td>
+        </tr>
+        <tr>
+            <td>2 – Critical</td>
+            <td>Critical condition</td>
+        </tr>
+        <tr>
+            <td>3 – Error</td>
+            <td>Error condition</td>
+        </tr>
+        <tr>
+            <td>4 – Warning</td>
+            <td>Warning condition</td>
+        </tr>
+        <tr>
+            <td>5 – Notification</td>
+            <td>Normal but significant condition</td>
+        </tr>
+        <tr>
+            <td>6 – Informational</td>
+            <td>Informational message only</td>
+        </tr>
+        <tr>
+            <td>7 – Debugging</td>
+            <td>Appears during debugging only</td>
+        </tr>
+    </tbody>
+</table>
+
 ### Components
 
 - **SNMP Manager**: The device that collects and processes information from managed devices. It can also send configuration updates to managed devices.
