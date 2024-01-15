@@ -4,6 +4,10 @@
 ![Last Updated](https://img.shields.io/badge/Last%20Updated-2024--01--15-blue)
 
 ![Keyword](https://img.shields.io/badge/NetFlow-darkgreen)
+![Keyword](https://img.shields.io/badge/Flow%20Record-darkgreen)
+![Keyword](https://img.shields.io/badge/Flow%20Exporter-darkgreen)
+![Keyword](https://img.shields.io/badge/Flow%20Monitor-darkgreen)
+
 <hr>
 
 ## Overview
