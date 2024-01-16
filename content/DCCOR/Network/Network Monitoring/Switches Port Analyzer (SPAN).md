@@ -73,8 +73,6 @@ monitor session 47 type erspan-destination
   vrf default
   no shutdown
 !
-monitor erspan origin ip-address 10.10.10.1 global
-!
 interface Eth2/34
   switchport
   switchport monitor
