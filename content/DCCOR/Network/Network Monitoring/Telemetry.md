@@ -1,7 +1,7 @@
 # Telemetry
 
 ![Exam](https://img.shields.io/badge/DCCOR-8A2BE2)
-![Last Updated](https://img.shields.io/badge/Last%20Updated-2024--01--17blue)
+![Last Updated](https://img.shields.io/badge/Last%20Updated-2024--01--17-blue)
 
 ![Keyword](https://img.shields.io/badge/Telemetry-darkgreen)
 ![Keyword](https://img.shields.io/badge/NXOS-darkgreen)
