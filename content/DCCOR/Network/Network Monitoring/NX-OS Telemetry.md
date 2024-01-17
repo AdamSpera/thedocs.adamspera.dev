@@ -1,4 +1,4 @@
-# Telemetry
+# NX-OS Telemetry
 
 ![Exam](https://img.shields.io/badge/DCCOR-8A2BE2)
 ![Last Updated](https://img.shields.io/badge/Last%20Updated-2024--01--17-blue)
@@ -31,10 +31,9 @@ telemetry
     ip address 172.27.247.72 port 60001 protocol gRPC encoding GPB
   sensor-group 1
     data-source NX-API
-      path "show system resources"
+      path "show run"
       path "show version"
-      path "show ip access-list test"
   subscription 1
     dst-grp 1
-      snsr-grp 1 sample-interval 750000
+    snsr-grp 1 sample-interval 750000
 </pre>
