@@ -37,8 +37,7 @@ All frames between source and destination follow the same links for a given flow
 
 **Exchange Based**
 
-The first frame in an exchange is assigned to a link, and then subsequent frames in the exchange follow the same link. However, subsequent exchanges can use a different link. This method provides finer granularity for load balancing
-while preserving the order of frames for each exchange.
+The first frame in an exchange is assigned to a link, and then subsequent frames in the exchange follow the same link. However, subsequent exchanges can use a different link. This method provides finer granularity for load balancing while preserving the order of frames for each exchange.
 
 ## Configuration
 
