@@ -41,7 +41,7 @@ The name must be unique across all VSANs.
 
 ## Dynamic Port VSAN Membership (DPVM)
 
-This feature allows a port to be auto assigned a VSAN base don teh N ports WWN or WWPN.
+This feature allows a port to be auto assigned a VSAN based on the N ports WWN or WWPN.
 
 DPVM configurations are based on port World Wide Name (pWWN) and node World Wide
 Name (nWWN) assignments. DPVM contains mapping information for each device pWWN/
