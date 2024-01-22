@@ -18,6 +18,7 @@ function setupEventHandlers() {
     $('#explore').click(() => {
         $('#section-documentviewer').empty();
         $('#section-fileexplorer').show();
+        $('.navbar-toggler').click();
     });
     $('#clear-cache').click(async () => {
         const cache = await caches.open('docs-cache');

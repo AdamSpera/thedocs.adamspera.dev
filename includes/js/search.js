@@ -5,6 +5,7 @@ $(document).ready(function () {
   // When the search button is clicked...
   $("#search").click(async function (event) {
     event.preventDefault();
+    $('.navbar-toggler').click();
 
     // Fetch the directory structure from cache and so on
     directoryStructure = await fetchDirectoryContents(base_url);
@@ -97,6 +98,10 @@ function fileNameSearch(query) {
 };
 
 async function fileKeySearch(query) {
+
+  // TEMPORARY DISABLED
+  console.log('Searching by file keys is disabled.');
+  return;
 
   // Search the directory structure for all files
   let mdFiles = searchFiles(directoryStructure, '.md');
