@@ -119,7 +119,6 @@ vsan database
   vsan 3 name HR_Team
 !
 interface fc1/1
-  switchport mode trunk on
-  switchport trunk mode auto
+  switchport trunk mode on
   switchport trunk allowed vsan 1-10
 </pre>
