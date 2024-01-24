@@ -46,23 +46,38 @@ hardware access-list tcam region ing-redirect 256
 copy running-config startup-config
 reload
 !
+feature lldp
 install feature-set fcoe
 feature-set fcoe
-feature lldp
+
+(ENTER COMMANDS DISPLAYED IN HINT)
+
+copy running-config startup-config
+reload
+
+<-----After reload----->
+
+vsan database
+  vsan 200
 !
 vlan 200
-  fcoe vsan 2
+  fcoe vsan 200
 !
 interface Ethernet 1/1
-  spanning-tree port type edge trunk
+  shutdown
   switchport mode trunk
-  switchport trunk allowed vlan 1,200
+  switchport trunk native vlan 56
+  switchport trunk allowed vlan 56,200
+  spanning-tree port type edge trunk
+  mtu 9216
+  service-policy type qos input default-fcoe-in-policy
+  no shutdown
 !
-interface vfc 4
+interface vfc 1
   bind interface Ethernet 1/1
 !
 vsan database
-  vsan 2 interface vfc 4
+  vsan 200 interface vfc 1
 </pre>
 
 ## FCoE Initialization Protocol (FIP)
