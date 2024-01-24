@@ -40,12 +40,6 @@ Provides communication of the following parameters:
 ## Virtual Fibre Channel
 
 <pre>
-hardware access-list tcam region ing-racl 1536
-hardware access-list tcam region ing-ifacl 256
-hardware access-list tcam region ing-redirect 256
-copy running-config startup-config
-reload
-!
 feature lldp
 install feature-set fcoe
 feature-set fcoe
