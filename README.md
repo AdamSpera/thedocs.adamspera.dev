@@ -50,4 +50,4 @@ To prevent this, caching on the request is enabled at the browser level.
 
 The timeout for the cache can be changed in script.js in the getCachedResponse function.
 
-The default timeout is 30 minutes.
+The default timeout is a day in minutes.
