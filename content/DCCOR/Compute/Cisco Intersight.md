@@ -37,5 +37,4 @@ Must be using Chrome.
 
 1. Go to UCS Manager for the intended device.
 2. Get the Device ID and Claim Code from "Admin > Device Connecter > Connection"
-3. Go to teh Intersight portal and go to "System >Admin > Targets", then click Claim a New Target
-4. 
+3. Go to the Intersight portal and go to "System >Admin > Targets", then click Claim a New Target
