@@ -8,7 +8,7 @@
 
 <hr>
 
-## HyperFlex Nodes
+## HyperFlex Details
 
 **Edge Device**
 
